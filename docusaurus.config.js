@@ -5,15 +5,16 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-    title: 'PixiJS',
+    title: 'PixiJS中文网',
     tagline: 'Homepage still needs to be revamped',
-    url: 'https://pixijs.com',
+    url: 'https://pixijs-cn.vercel.app',
     baseUrl: '/',
     onBrokenLinks: 'throw',
     onBrokenMarkdownLinks: 'throw',
     favicon: 'images/favicon.png',
 
     customFields: {
+        keywords: ['PixiJS中文网', 'pixijs', 'pixijs-cn', 'PixiJS中文', 'PixiJS中文文档'],
         PIXI_VERSION: process.env.PIXI_VERSION || 'dev',
     },
 
