@@ -1,35 +1,35 @@
-# Render Loop
+# 渲染循环
 
-Now that you understand the major parts of the system, let's look at how these parts work together to get your project onto the screen.  Unlike a web page, PixiJS is constantly updating and re-drawing itself, over and over.  You update your objects, then PixiJS renders them to the screen, then the process repeats.  We call this cycle the render loop.
+现在您已经了解了系统的主要组成部分，让我们看看这些部分是如何协同工作将您的项目显示在屏幕上的。与网页不同，PixiJS在不断更新和重新绘制自身，一次又一次。您更新您的对象，然后PixiJS将它们渲染到屏幕上，然后循环重复。我们称这个周期为渲染循环。
 
-The majority of any PixiJS project is contained in this update + render cycle.  You code the updates, PixiJS handles the rendering.
+任何PixiJS项目的大部分内容都包含在这个更新+渲染循环中。您编写更新代码，PixiJS负责渲染。
 
-Let's walk through what happens each frame of the render loop.  There are three main steps.
+让我们逐帧介绍渲染循环中发生的三个主要步骤。
 
-<!--(TODO: This guide is half baked.  I need feedback from the core team about what would be helpful to put here, and clarification on what's really going on under the hood.)-->
+<!--（待办事项：这个指南还未完成。我需要核心团队的反馈，了解在这里放什么内容，以及对底层发生的事情有什么具体的解释。）-->
 
-## Running Ticker Callbacks
+## 运行Ticker回调
 
-The first step is to calculate how much time has elapsed since the last frame, and then call the Application object's ticker callbacks with that time delta.  This allows your project's code to animate and update the sprites, etc. on the stage in preparation for rendering.
+第一步是计算上一帧到当前帧经过的时间，并调用Application对象的ticker回调并传入该时间差。这使得项目的代码可以在舞台上动画和更新精灵等内容，为渲染做准备。
 
-## Updating the Scene Graph
+## 更新场景图
 
-We'll talk a *lot* more about what a scene graph is and what it's made of in the next guide, but for now, all you need to know is that it contains the things you're drawing - sprites, text, etc. - and that these objects are in a tree-like hierarchy.  After you've updated your game objects by moving, rotating and so forth, PixiJS needs to calculate the new positions and state of every object in the scene, before it can start drawing.
+我们在下一节将详细讨论场景图是什么以及由什么组成，但目前您只需知道它包含了您绘制的内容 - 如精灵、文本等 - 并且这些对象在一个类似树状的层次结构中。在通过移动、旋转等方式更新游戏对象后，PixiJS需要计算场景中每个对象的新位置和状态，然后才能开始绘制。
 
-<!--(TODO: Is this true?  My understanding was that there is a transform/state update before the render pass, but I couldn't find it in the code.)-->
+<!--（待办事项：这是真的吗？我理解是在渲染过程之前有一个变换/状态更新，但在代码中找不到它。）-->
 
-## Rendering the Scene Graph
+## 渲染场景图
 
-Now that our game's state has been updated, it's time to draw it to the screen.  The rendering system starts with the root of the scene graph (`app.stage`), and starts rendering each object and its children, until all objects have been drawn.  No culling or other cleverness is built into this process.  If you have lots of objects outside of the visible portion of the stage, you'll want to investigate disabling them as an optimization.
+现在我们的游戏状态已经更新，是时候将其绘制到屏幕上了。渲染系统从场景图的根节点（`app.stage`）开始，然后逐个渲染每个对象及其子对象，直到所有对象都被绘制完成。此过程中没有内置裁剪或其他智能优化。如果您的舞台上有很多超出可见范围的对象，您可以考虑禁用它们以进行优化。
 
-## Frame Rates
+## 帧率
 
-A note about frame rates.  The render loop can't be run infinitely fast - drawing things to the screen takes time.  In addition, it's not generally useful to have a frame updated more than once per screen update (commonly 60fps, but newer monitors can support 144fps and up).  Finally, PixiJS runs in the context of a web browser like Chrome or Firefox.  The browser itself has to balance the needs of various internal operations with servicing any open tabs.  All this to say, determining when to draw a frame is a complex issue.
+关于帧率的说明。渲染循环无法无限制地运行 - 绘制内容到屏幕需要时间。此外，帧率不应超过每次屏幕更新一次（通常为60fps，但较新的显示器支持144fps或更高）。最后，PixiJS运行在类似Chrome或Firefox的Web浏览器上。浏览器本身必须平衡各种内部操作的需求以及为任何打开的标签提供服务。所有这些都意味着确定何时绘制帧是一个复杂的问题。
 
-<!--For most projects, you can use the default settings for the Ticker object, which will ... (TODO: The docs are a bit unclear on what happens if you don't set a min/max FPS - confirm)-->
+<!--对于大多数项目，您可以使用Ticker对象的默认设置，这将...（待办事项：如果不设置最小/最大FPS，文档有点不清楚 - 确认一下）-->
 
-In cases where you want to adjust that behavior, you can set the `minFPS` and `maxFPS` attributes on a Ticker to give PixiJS hints as to the range of tick speeds you want to support.  Just be aware that due to the complex environment, your project cannot _guarantee_ a given FPS.  Use the passed `delta` value in your ticker callbacks to scale any animations to ensure smooth playback.
+在某些情况下，如果您希望调整该行为，您可以在Ticker上设置`minFPS`和`maxFPS`属性，以向PixiJS提供有关所需支持的tick速度范围的提示。只需注意，由于复杂的环境，您的项目不能_保证_特定的FPS。在ticker回调中使用传递的`delta`值来调整任何动画，以确保平滑播放。
 
-## Custom Render Loops
+## 自定义渲染循环
 
-What we've just covered is the default render loop provided out of the box by the Application helper class.  There are many other ways of creating a render loop that may be helpful for advanced users looking to solve a given problem.  <!--You can read more about that in the [Custom Render Loop guide](TODO: link here).-->  While you're prototyping and learning PixiJS, sticking with the Application's provided system is the recommended approach.
+刚才介绍的是由Application辅助类提供的默认渲染循环。还有许多其他创建渲染循环的方法，可能对于希望解决特定问题的高级用户有所帮助。<!--您可以在[自定义渲染循环指南](TODO：在此处添加链接)中阅读更多相关信息。-->在您进行原型设计和学习PixiJS时，建议采用Application提供的系统。

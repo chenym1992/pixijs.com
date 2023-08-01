@@ -41,7 +41,7 @@ const config = {
                     sidebarPath: require.resolve('./sidebars.js'),
                     // Please change this to your repo.
                     // Remove this to remove the "edit this page" links.
-                    editUrl: 'https://github.com/pixijs/pixijs.com/tree/main/',
+                    editUrl: 'https://github.com/chenym1992/pixijs.com/tree/main/',
                     routeBasePath: '/',
                     versions: {
                         current: {
@@ -277,7 +277,7 @@ const config = {
                     width: 100,
                 },
                 // eslint-disable-next-line max-len
-                copyright: `© ${new Date().getFullYear()} PixiJS.<br>由 <a href="/team">PixiJS 团队</a>倾心打造.<a target="_blank" href="https://github.com/chenym1992">@chenym1992</a>翻译`,
+                copyright: `© ${new Date().getFullYear()} PixiJS.<br>由 <a href="/team">PixiJS 团队</a>倾心打造.<a target="_blank" href="https://github.com/chenym1992">@chenym1992</a>with <a target="_blank" href="https://chat.openai.com/">chatGPT</a>翻译`,
             },
             image: 'images/ogimage.png',
             prism: {

@@ -1,35 +1,35 @@
-# Scene Graph
+# 场景图
 
-Every frame, PixiJS is updating and then rendering the scene graph.  Let's talk about what's in the scene graph, and how it impacts how you develop your project.  If you've built games before, this should all sound very familiar, but if you're coming from HTML and the DOM, it's worth understanding before we get into specific types of objects you can render.
+每一帧，PixiJS都会更新并渲染场景图。让我们讨论一下场景图中包含了什么，以及它如何影响您开发项目。如果您以前构建过游戏，这些内容应该听起来非常熟悉，但如果您来自HTML和DOM，了解这些内容在我们深入研究特定类型的可渲染对象之前是值得的。
 
-## The Scene Graph Is a Tree
+## 场景图是一棵树
 
-The scene graph's root node is a container maintained by the application, and referenced with `app.stage`.  When you add a sprite or other renderable object as a child to the stage, it's added to the scene graph and will be rendered and interactable.  Most PixiJS objects can also have children, and so as you build more complex scenes, you will end up with a tree of parent-child relationships, rooted at the app's stage.
+场景图的根节点是应用程序维护的容器，可以用`app.stage`引用。当您将精灵或其他可渲染对象作为子元素添加到舞台上时，它们将被添加到场景图中，并且会被渲染和响应交互。大多数PixiJS对象也可以有子元素，因此随着您构建更复杂的场景，您将得到一个根为应用程序舞台的父子关系树。
 
-(A helpful tool for exploring your project is the [Pixi.js devtools plugin](https://chrome.google.com/webstore/detail/pixijs-devtools/aamddddknhcagpehecnhphigffljadon) for Chrome, which allows you to view and manipulate the scene graph in real time as it's running!)
+（在探索项目时，一个有用的工具是Chrome中的[Pixi.js devtools插件](https://chrome.google.com/webstore/detail/pixijs-devtools/aamddddknhcagpehecnhphigffljadon)，它允许您实时查看和操作场景图！）
 
-## Parents and Children
+## 父级和子级
 
-When a parent moves, its children move as well.  When a parent is rotated, its children are rotated too.  Hide a parent, and the children will also be hidden.  If you have a game object that's made up of multiple sprites, you can collect them under a container to treat them as a single object in the world, moving and rotating as one.
+当父级移动时，它的子元素也会移动。当父级旋转时，其子元素也会跟随旋转。隐藏父级时，子元素也会被隐藏。如果您有一个由多个精灵组成的游戏对象，您可以将它们收集在一个容器下，将它们作为世界中的单个对象进行移动和旋转。
 
-<!--TODO: verify this - vaguely remember caching of e.g. transforms to prevent having to run tree each frame?-->
+<!--TODO：验证这一点 - 模糊记得例如对变换的缓存，以避免每帧运行树？-->
 
-Each frame, PixiJS runs through the scene graph from the root down through all the children to the leaves to calculate each object's final position, rotation, visibility, transparency, etc.  If a parent's alpha is set to 0.5 (making it 50% transparent), all its children will start at 50% transparent as well.  If a child is then set to 0.5 alpha, it won't be 50% transparent, it will be 0.5 x 0.5 = 0.25 alpha, or 75% transparent.  Similarly, an object's position is relative to its parent, so if a parent is set to an x position of 50 pixels, and the child is set to an x position of 100 pixels, it will be drawn at a screen offset of 150 pixels, or 50 + 100.
+每一帧，PixiJS从根节点开始，从上到下遍历整个场景图，计算每个对象的最终位置、旋转、可见性、透明度等。如果父级的透明度设置为0.5（使其透明度为50%），所有子元素的透明度也将从50%开始。如果然后将子元素的透明度设置为0.5，它将不是50%的透明度，而是0.5 x 0.5 = 0.25透明度，即75%的透明度。类似地，对象的位置是相对于其父级的，因此如果父级的x位置设置为50像素，子级的x位置设置为100像素，它将在屏幕上的偏移量为150像素，即50 + 100。
 
-Here's an example.  We'll create three sprites, each a child of the last, and animate their position, rotation, scale and alpha.  Even though each sprite's properties are set to the same values, the parent-child chain amplifies each change:
+以下是一个示例。我们将创建三个精灵，每个精灵都是上一个精灵的子元素，并通过动画来改变它们的位置、旋转、缩放和透明度。即使每个精灵的属性设置为相同的值，父子链将放大每个更改：
 
 ```javascript
-// Create the application helper and add its render target to the page
+// 创建应用程序辅助对象并将其渲染目标添加到页面上
 const app = new PIXI.Application({ width: 640, height: 360 });
 document.body.appendChild(app.view);
 
-// Add a container to center our sprite stack on the page
+// 添加一个容器来将精灵堆栈居中在页面上
 const container = new PIXI.Container();
 container.x = app.screen.width / 2;
 container.y = app.screen.height / 2;
 app.stage.addChild(container);
 
-// Create the 3 sprites, each a child of the last
+// 创建3个精灵，每个精灵都是上一个精灵的子元素
 const sprites = [];
 let parent = container;
 for (let i = 0; i < 3; i++) {
@@ -40,7 +40,7 @@ for (let i = 0; i < 3; i++) {
   parent = sprite;
 }
 
-// Set all sprite's properties to the same value, animated over time
+// 将所有精灵的属性设置为相同的值，并在一段时间内进行动画
 let elapsed = 0.0;
 app.ticker.add((delta) => {
   elapsed += delta / 60;
@@ -59,15 +59,17 @@ app.ticker.add((delta) => {
 });
 ```
 
-The cumulative translation, rotation, scale and skew of any given node in the scene graph is stored in the object's `worldTransform` property.  Similarly, the cumulative alpha value is stored in the `worldAlpha` property.
+场景图中任何给定节点的累积平移、旋转、缩放和扭曲变换以及透明度值存储在对象的`worldTransform`属性中。同样，累积的alpha值存储在`worldAlpha`属性中。
 
-## Render Order
+## 渲染顺序
 
-So we have a tree of things to draw.  Who gets drawn first?
+所以我们有一个绘制对象树的问题。谁会先绘制？
 
-PixiJS renders the tree from the root down.  At each level, the current object is rendered, then each child is rendered in order of insertion.  So the second child is rendered on top of the first child, and the third over the second.
+PixiJS 从树的根节点开始自上而下进行渲染。在每个级别上，首先绘制当前对象，然后按照插入顺序依次绘制每个子对象。这意味着第二个子对象将绘制在第一个子对象的上面，第三个子对象将绘制在第二个子对象的上面。
 
-Check out this example, with two parent objects A & D, and two children B & C under A:
+我们来看一个示例，有两个父对象 A 和 D，以及 A 下面有两个子对象 B 和 C：
+
+
 
 ```javascript
 // Create the application helper and add its render target to the page
@@ -118,35 +120,36 @@ app.ticker.add((delta) => {
 });
 ```
 
-If you'd like to re-order a child object, you can use `setChildIndex()`.  To add a child at a given point in a parent's list, use `addChildAt()`.  Finally, you can enable automatic sorting of an object's children using the `sortableChildren` option combined with setting the `zIndex` property on each child.
+如果您想重新排序子对象，可以使用 `setChildIndex()` 方法。要在父对象的列表中的特定位置添加一个子对象，可以使用 `addChildAt()` 方法。最后，您可以通过使用 `sortableChildren` 选项并在每个子对象上设置 `zIndex` 属性来启用对象子元素的自动排序。
 
-## Culling
+## 裁剪
 
-If you're building a project where a large proportion of your DisplayObject's are off-screen (say, a side-scrolling game), you will want to *cull* those objects.  Culling is the process of evaluating if an object (or its children!) is on the screen, and if not, turning off rendering for it.  If you don't cull off-screen objects, the renderer will still draw them, even though none of their pixels end up on the screen.  
+如果你正在构建一个项目，其中大部分的 `DisplayObject` 都在屏幕外面（比如一个横向滚动的游戏），你可能想要对这些对象进行 *裁剪*。裁剪是评估一个对象（或其子对象！）是否在屏幕上的过程，如果不在屏幕上，就将其渲染关闭。如果你不裁剪屏幕外的对象，渲染器仍会绘制它们，即使它们的像素最终不会显示在屏幕上。
 
-PixiJS doesn't provide built-in support for viewport culling, but you can find 3rd party plugins that might fit your needs.  Alternately, if you'd like to build your own culling system, simply run your objects during each tick and set `renderable` to false on any object that doesn't need to be drawn.
+PixiJS 并不提供内置的视口裁剪支持，但你可以找到第三方插件来满足你的需求。或者，如果你想要构建自己的裁剪系统，只需在每个 `tick` 运行你的对象，并在任何不需要绘制的对象上将 `renderable` 属性设置为 false。
 
-## Local vs Global Coordinates
+## 局部坐标与全局坐标
 
-If you add a sprite to the stage, by default it will show up in the top left corner of the screen.  That's the origin of the global coordinate space used by PixiJS.  If all your objects were children of the stage, that's the only coordinates you'd need to worry about.  But once you introduce containers and children, things get more complicated.  A child object at [50, 100] is 50 pixels right and 100 pixels down *from its parent*.
+如果你将一个精灵（sprite）添加到舞台（stage），默认情况下它会显示在屏幕的左上角。那是 PixiJS 使用的全局坐标空间的原点。如果所有的对象都是舞台的子对象，那么你只需要关心这个坐标系。但一旦你引入容器和子对象，情况会变得更加复杂。一个位于 [50, 100] 的子对象是相对于其父对象向右 50 个像素，向下 100 个像素。
 
-We call these two coordinate systems "global" and "local" coordinates.  When you use `position.set(x, y)` on an object, you're always working in local coordinates, relative to the object's parent.
+我们将这两种坐标系统称为“全局坐标”和“局部坐标”。当你使用 `position.set(x, y)` 在一个对象上时，你总是在使用局部坐标，相对于该对象的父对象。
 
-The problem is, there are many times when you want to know the global position of an object.  For example, if you want to cull offscreen objects to save render time, you need to know if a given child is outside the view rectangle.
+问题是，有很多时候你想要知道一个对象的全局位置。例如，如果你想要裁剪屏幕外的对象以节省渲染时间，你需要知道给定子对象是否在视图矩形之外。
 
-To convert from local to global coordinates, you use the `toGlobal()` function.  Here's a sample usage:
+要将局部坐标转换为全局坐标，你可以使用 `toGlobal()` 函数。以下是一个示例用法：
 
 ```javascript
-// Get the global position of an object, relative to the top-left of the screen
-let globalPos = obj.toGlobal(new PIXI.Point(0,0));
+// 获取一个对象的全局位置，相对于屏幕左上角
+let globalPos = obj.toGlobal(new PIXI.Point(0, 0));
 ```
 
-This snippet will set `globalPos` to be the global coordinates for the child object, relative to [0, 0] in the global coordinate system.
+这段代码片段将设置 globalPos 变量为子对象的全局坐标，相对于全局坐标系统中的 [0, 0] 点。
 
-## Global vs Screen Coordinates
+## 全局坐标与屏幕坐标
 
-When your project is working with the host operating system or browser, there is a third coordinate system that comes into play - "screen" coordinates (aka "viewport" coordinates).  Screen coordinates represent position relative to the top-left of the canvas element that PixiJS is rendering into.  Things like the DOM and native mouse click events work in screen space.  
+当你的项目与主机操作系统或浏览器交互时，会涉及到第三个坐标系 - "屏幕" 坐标（也称为 "视口" 坐标）。屏幕坐标表示相对于 PixiJS 渲染到的画布元素的左上角的位置。DOM 和原生鼠标点击事件等在屏幕空间中工作。
 
-Now, in many cases, screen space is equivalent to world space.  This is the case if the size of the canvas is the same as the size of the render view specified when you create you PIXI.Application.  By default, this will be the case - you'll create for example an 800x600 application window and add it to your HTML page, and it will stay that size.  100 pixels in world coordinates will equal 100 pixels in screen space.  BUT!  It is common to stretch the rendered view to have it fill the screen, or to render at a lower resolution and up-scale for speed.  In that case, the screen size of the canvas element will change (e.g. via CSS), but the underlying render view will *not*, resulting in a mis-match between world coordinates and screen coordinates.
+现在，在很多情况下，屏幕空间等同于世界空间。这是因为画布的大小与创建 PIXI.Application 时指定的渲染视图大小相同。默认情况下，这将成立 - 例如，你创建了一个 800x600 的应用窗口并将其添加到你的 HTML 页面，它将保持这个大小。世界坐标中的 100 个像素将等于屏幕空间中的 100 个像素。但是！通常会将渲染视图拉伸以使其填充屏幕，或者以较低的分辨率进行渲染，并进行高比例缩放以提高速度。在这种情况下，画布元素的屏幕大小会改变（例如通过 CSS），但底层的渲染视图不会改变，从而导致世界坐标与屏幕坐标不匹配。
 
-<!--TODO: best method to convert from world to screen coords?-->
+<!--TODO: 从世界坐标转换到屏幕坐标的最佳方法是什么？-->
+

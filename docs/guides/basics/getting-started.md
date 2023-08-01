@@ -1,17 +1,15 @@
-# Getting Started
+# 入门指南
 
-In this section we're going to build the simplest possible PixiJS application.  In doing so, we'll walk through the basics of how to build and serve the code.
+在本节中，我们将构建最简单的 PixiJS 应用程序。通过这样做，我们将介绍构建和提供代码的基础知识。
 
-### Advanced Users
+### 高级用户
 
-A quick note before we start: this guide is aimed at beginning PixiJS developers who have minimal
-experience developing JavaScript-based applications.  If you are a coding veteran, you may find that
-the level of detail here is not helpful. If that's the case, you may want to skim this guide, then
-jump into [how to work with PixiJS and packers](#TODO) like webpack and npm.
+一个快速提示在开始之前：本指南面向刚开始使用 PixiJS 的开发者，他们对于使用基于 JavaScript 的应用程序开发的经验有限。如果你是一位编程专家，可能会发现这里的细节不够详细。如果是这种情况，你可以快速浏览本指南，然后转向像 webpack 和 npm 这样的 [如何使用 PixiJS 和打包工具](#TODO)。
 
-### A Note About JavaScript
 
-One final note.  The JavaScript universe is currently in transition from old-school JavaScript (ES5) to the newer ES6 flavor:
+### 关于 JavaScript 的说明
+
+最后一点。JavaScript 的世界目前正在从传统的 JavaScript（ES5）过渡到较新的 ES6 风格：
 
 ```javascript
 // ES5
@@ -22,25 +20,26 @@ const x = 5;
 setTimeout(() => alert(x), 1000);
 ```
 
-ES6 brings a number of major advantages in terms of clearer syntax, better variable scoping, native class support, etc.  By now, all major browsers support it.  Given this, our examples in these guides will use ES6.  This doesn't mean you can't use PixiJS with ES5 programs!  Just mentally substitute "var" for "let/const", expand the shorter function-passing syntax, and everything will run just fine.
+ES6 带来了许多重要优势，包括更清晰的语法、更好的变量作用域、原生类支持等等。目前，所有主流浏览器都支持 ES6。基于此，我们在这些指南中将使用 ES6。但这并不意味着您不能在 ES5 程序中使用 PixiJS！只需在心中用 "var" 替换为 "let/const"，扩展较短的函数传递语法，一切都会正常运行。
 
-### Components of a PixiJS Application
+### PixiJS 应用程序的组成部分
 
-OK!  With those notes out of the way, let's get started.  There are only a few steps required to write a PixiJS application:
+好的！现在让我们开始吧。编写 PixiJS 应用程序只需要几个简单的步骤：
 
-* Create an HTML file
-* Serve the file with a web server
-* Load the PixiJS library
-* Create an [Application](https://pixijs.download/release/docs/PIXI.Application.html)
-* Add the generated view to the DOM
-* Add an image to the stage
-* Write an update loop
+* 创建一个 HTML 文件
+* 使用 web 服务器提供文件
+* 加载 PixiJS 库
+* 创建一个 [应用程序](https://pixijs.download/release/docs/PIXI.Application.html)
+* 将生成的视图添加到 DOM 中
+* 添加一个图像到舞台
+* 编写一个更新循环
 
-Let's walk through them together.
+让我们一起逐步完成这些步骤。
 
-### The HTML File
 
-PixiJS is a JavaScript library that runs in a web page.  So the first thing we're going to need is some HTML in a file.  In a real PixiJS application, you might want to embed your display within a complex existing page, or you might want your display area to fill the whole page.  For this demo, we'll build an empty page to start:
+### HTML文件
+
+PixiJS是一个在网页中运行的JavaScript库。因此，我们首先需要在一个文件中编写一些HTML代码。在真实的PixiJS应用中，您可能希望将显示区域嵌入到一个复杂的现有页面中，或者您可能希望显示区域填充整个页面。对于这个演示，我们将从一个空白页面开始构建：
 
 ```html
 <!doctype html>
@@ -53,76 +52,77 @@ PixiJS is a JavaScript library that runs in a web page.  So the first thing we'r
 </html>
 ```
 
-Create a new folder named `pixi-test`, then copy and paste this HTML into a new file in the `pixi-test` folder named `index.html`.
+创建一个名为 `pixi-test` 的新文件夹，然后将这段HTML代码复制并粘贴到 `pixi-test` 文件夹中的一个名为 `index.html` 的新文件中。
 
-### Serving the File
+### 启动文件服务器
 
-You will need to run a web server to develop locally with PixiJS.  Web browsers prevent loading local files (such as images and audio files) on locally loaded web pages.  If you just double-click your new HTML file, you'll get an error when you try to add a sprite to the PixiJS stage.
+要在本地开发PixiJS应用程序，您需要运行一个Web服务器。Web浏览器会阻止在本地加载的网页中加载本地文件（例如图片和音频文件）。如果您只是双击打开新的HTML文件，当您尝试将精灵添加到PixiJS舞台时，会出现错误。
 
-Running a web server sounds complex and difficult, but it turns out there are a number of simple web servers that will serve this purpose.  For this guide, we're going to be working with [Mongoose](https://mongoose.ws), but you could just as easily use [XAMPP](https://www.apachefriends.org/download.html) or the [http-server Node.js package](https://www.npmjs.com/package/http-server) to serve your files.
+听起来运行一个Web服务器可能复杂且困难，但实际上有许多简单的Web服务器可以满足这个需求。在本指南中，我们将使用[Mongoose](https://mongoose.ws)，但您也可以轻松地使用[XAMPP](https://www.apachefriends.org/download.html)或[http-server Node.js包](https://www.npmjs.com/package/http-server)来提供文件服务。
 
-To start serving your page with Mongoose, go to [the Mongoose download page](https://mongoose.ws) and download the free server for your operating system.   Mongoose defaults to serving the files in the folder it's run in, so copy the downloaded executable into the folder you created in the prior step (`pixi-test`).  Double-click the executable, tell your operating system that you trust the file to run, and you'll have a running web server, serving your new folder.
+首先，您需要前往[Mongoose下载页面](https://mongoose.ws)下载适用于您的操作系统的免费服务器。Mongoose默认会在其运行的文件夹中提供文件服务，因此将下载的可执行文件复制到您在前面步骤（`pixi-test`）中创建的文件夹中。然后，双击可执行文件，告诉您的操作系统您信任该文件运行，这样您就会拥有一个正在运行的Web服务器，可以为您的新文件夹提供文件服务。
 
-Test that everything is working by opening your browser of choice and entering `http://127.0.0.1:8080` in the location bar.  (Mongoose by default serves files on port 8080.)  You should see "Hello PixiJS" and nothing else.  If you get an error at this step, it means you didn't name your file `index.html` or you mis-configured your web server.
+通过打开您喜欢的浏览器，并在地址栏中输入`http://127.0.0.1:8080`来测试是否一切正常。（Mongoose默认在8080端口提供文件服务。）您应该会看到“Hello PixiJS”，而且除此之外什么都没有。如果在这一步出现错误，这意味着您的文件名不是`index.html`，或者您配置了错误的Web服务器。
 
-### Loading PixiJS
+### 加载PixiJS
 
-OK, so we have a web page, and we're serving it.  But it's empty.  The next step is to actually load the PixiJS library.  If we were building a real application, we'd want to download a target version of PixiJS from the [Pixi Github repo](https://github.com/pixijs/pixijs) so that our version wouldn't change on us.  But for this sample application, we'll just use the CDN version of PixiJS.  Add this line to the `<head>` section of your `index.html` file:
+好的，现在我们有了一个网页，并且正在提供文件服务。但是页面还是空的。下一步是实际加载PixiJS库。如果我们正在构建一个真正的应用程序，我们会从[Pixi Github仓库](https://github.com/pixijs/pixijs)下载目标版本的PixiJS，以确保我们的版本不会改变。但是对于这个示例应用程序，我们将使用PixiJS的CDN版本。将下面这行代码添加到您的`index.html`文件的`<head>`部分：
+
 
 ```html
 <script src="https://pixijs.download/release/pixi.js"></script>
 ```
 
-This will include a *non-minified* version of the latest version of PixiJS when your page loads, ready to be used.  We use the non-minified version because we're in development.  In production, you'd want to use `pixi.min.js` instead, which is compressed for faster download and excludes assertions and deprecation warnings that can help when building your project, but take longer to download and run.
+这将在页面加载时包含最新版本的PixiJS的*非压缩*版本，可以立即使用。在开发中，我们使用非压缩版本。在生产环境中，您应该使用`pixi.min.js`，它经过压缩以实现更快的下载速度，并排除了在构建项目时可能有用的断言和弃用警告，但下载和运行时间会更长。
 
-### Creating an Application
+### 创建一个应用程序
 
-Loading the library doesn't do much good if we don't *use* it, so the next step is to start up PixiJS.  Start by replacing the line `<h1>Hello PixiJS</h1>` with a script tag like so:
+加载库并不会带来太多好处，如果我们不*使用*它，所以下一步是启动PixiJS。从以下代码中替换`<h1>Hello PixiJS</h1>`行开始：
 
 ```html
 <script>
   let app = new PIXI.Application({ width: 640, height: 360 });
 </script>
 ```
+我们在这里添加了一个JavaScript代码块，在该代码块中创建了一个新的PIXI.Application实例。[Application](https://pixijs.download/release/docs/PIXI.Application.html)是一个辅助类，简化了对PixiJS的操作。它创建了渲染器、创建了舞台(stage)并启动了一个更新的ticker。在生产环境中，您可能希望自行执行这些步骤以进行自定义和控制 - 我们将在后面的指南中进行介绍。目前，Application类是开始使用PixiJS的绝佳方式，无需担心细节。
 
-What we're doing here is adding a JavaScript code block, and in that block creating a new PIXI.Application instance. [Application](https://pixijs.download/release/docs/PIXI.Application.html) is a helper class that simplifies working with PixiJS.  It creates the renderer, creates the stage, and starts a ticker for updating.  In production, you'll almost certainly want to do these steps yourself for added customization and control - we'll cover doing so in a later guide.  For now, the Application class is a perfect way to start playing with PixiJS without worrying about the details.
+### 将视图添加到DOM
 
-### Adding the View to the DOM
-
-When the PIXI.Application class creates the renderer, it builds a Canvas element that it will render *to*.  In order to see what we draw with PixiJS, we need to add this Canvas element to the web page's DOM.  Append the following line to your page's script block:
+当PIXI.Application类创建渲染器时，它会构建一个Canvas元素来进行渲染。为了查看我们用PixiJS绘制的内容，我们需要将这个Canvas元素添加到网页的DOM中。在页面的脚本块中追加以下代码行：
 
 ```JavaScript
   document.body.appendChild(app.view);
 ```
+这将把应用程序创建的视图（Canvas元素）添加到页面的body中。
 
-This takes the view created by the application (the Canvas element) and adds it to the body of your page.
+### 创建精灵(Sprite)
 
-### Creating a Sprite
+到目前为止，我们所做的都是准备工作。实际上，我们还没有告诉PixiJS绘制任何东西。让我们通过添加一个要显示的图像来修复这个问题。
 
-So far all we've been doing is prep work.  We haven't actually told PixiJS to draw anything.  Let's fix that by adding an image to be displayed.
+在PixiJS中，有许多绘制图像的方法，但最简单的方法是使用[Sprite](https://pixijs.download/release/docs/PIXI.Sprite.html)。我们将在后面的指南中详细介绍场景图(scene graph)的工作原理，但现在你只需要知道PixiJS呈现的是一组[DisplayObjects](https://pixijs.download/release/docs/PIXI.DisplayObject.html)的层级结构。Sprite是一种DisplayObject类型，它包装了一个加载的图像资源，以允许绘制、缩放、旋转等操作。
 
-There are a number of ways to draw images in PixiJS, but the simplest is by using a [Sprite](https://pixijs.download/release/docs/PIXI.Sprite.html).  We'll get into the details of how the scene graph works in a later guide, but for now all you need to know is that PixiJS renders a hierarchy of [DisplayObjects](https://pixijs.download/release/docs/PIXI.DisplayObject.html).  A Sprite is a type of DisplayObject that wraps a loaded image resource to allow drawing it, scaling it, rotating it, and so forth.
+在PixiJS渲染图像之前，它需要被加载。就像在任何网页中一样，图像加载是异步的。我们将在后面的指南中更详细地讨论资源加载。目前，我们可以使用PIXI.Sprite类上的辅助方法来处理图像加载：
 
-Before PixiJS can render an image, it needs to be loaded.  Just like in any web page, image loading happens asynchronously.  We'll talk a lot more about resource loading in later guides.  For now, we can use a helper method on the PIXI.Sprite class to handle the image loading for us:
 
 ```JavaScript
   // Magically load the PNG asynchronously
   let sprite = PIXI.Sprite.from('sample.png');
 ```
 
-[Download the sample PNG here](/images/sample.png), and save it into your `pixi-test` directory next to your `index.html`.
+[在此处下载示例PNG](/images/sample.png)，并将其保存到 `pixi-test` 目录中，与 `index.html` 文件放在一起。
 
-### Adding the Sprite to the Stage
+### 将精灵添加到舞台
 
-Finally, we need to add our new sprite to the stage.  The stage is simply a [Container](https://pixijs.download/release/docs/PIXI.Container.html) that is the root of the scene graph.  Every child of the stage container will be rendered every frame.  By adding our sprite to the stage, we tell PixiJS's renderer we want to draw it.
+最后，我们需要将新的精灵添加到舞台上。舞台（Stage）是一个简单的 [Container](https://pixijs.download/release/docs/PIXI.Container.html)，它是场景图的根节点。舞台容器的每个子对象都会在每一帧被渲染。通过将我们的精灵添加到舞台，我们告诉 PixiJS 的渲染器我们想要绘制它。
 
 ```JavaScript
   app.stage.addChild(sprite);
 ```
 
-### Writing an Update Loop
+### 编写更新循环
 
-While you _can_ use PixiJS for static content, for most projects you'll want to add animation.  Our sample app is actually cranking away, rendering the same sprite in the same place multiple times a second.  All we have to do to make the image move is to update its attributes once per frame.  To do this, we want to hook into the application's _ticker_.  A ticker is a PixiJS object that runs one or more callbacks each frame.  Doing so is surprisingly easy.  Add the following to the end of your script block:
+虽然你可以在 PixiJS 中使用静态内容，但在大多数项目中，你可能会希望添加动画效果。我们的示例应用实际上会以每秒多次的频率渲染相同位置的精灵。要使图像移动，我们只需要在每一帧更新其属性。为此，我们要钩入应用程序的 _ticker_。ticker 是 PixiJS 的一个对象，它在每一帧运行一个或多个回调函数。做到这一点非常简单。将以下代码添加到你的脚本块的末尾：
+
 
 ```javascript
   // Add a variable to count up the seconds our demo has been running
@@ -138,13 +138,14 @@ While you _can_ use PixiJS for static content, for most projects you'll want to 
   });
 ```
 
-All you need to do is to call `app.ticker.add(...)`, pass it a callback function, and then update your scene in that function.  It will get called every frame, and you can move, rotate etc. whatever you'd like to drive your project's animations.
+你只需要调用 `app.ticker.add(...)`，将一个回调函数传递给它，并在该函数中更新你的场景。它会在每一帧被调用，你可以在其中实现移动、旋转等，以驱动你项目的动画效果。
 
-### Putting It All Together
 
-That's it!  The simplest PixiJS project!
+### 将所有内容整合在一起
 
-Here's the whole thing in one place.  Check your file and make sure it matches if you're getting errors.
+就是这样！这是最简单的PixiJS项目！
+
+以下是将所有代码整合在一处的内容。如果您遇到错误，请检查您的文件确保与以下代码匹配。
 
 ```html
 <!doctype html>
@@ -173,4 +174,4 @@ Here's the whole thing in one place.  Check your file and make sure it matches i
 </html>
 ```
 
-Once you have things working, the next thing to do is to read through the rest of the Basics guides to dig into how all this works in much greater depth.
+一旦您使一切正常运行，接下来要做的是阅读其他基础指南，深入了解这些内容的更多细节。

@@ -1,39 +1,40 @@
-# What PixiJS Is Not
+# PixiJS 不是什么
 
-While PixiJS can do many things, there are things it can't do, or that require additional tools to accomplish.  Newcomers to PixiJS often struggle to identify which tasks PixiJS can solve, and which require outside solutions.  If you're about to start a project, it can be helpful to know if PixiJS is a good fit for your needs.  The following list is obviously incomplete - PixiJS is also not, for example, a duck - but it includes many common tasks or features that you might expect us to support.
+虽然 PixiJS 能够完成许多任务，但也有一些事情它不能做，或者需要额外的工具来完成。对于初次接触 PixiJS 的人来说，很难区分 PixiJS 可以解决哪些任务，以及哪些任务需要外部解决方案。如果你即将开始一个项目，了解 PixiJS 是否适合你的需求会很有帮助。以下列表显然是不完整的 - 例如，PixiJS 也不是一只鸭子 - 但它包含了许多常见的任务或功能，你可能期望我们支持。
 
-## PixiJS Is Not ... A Framework
+## PixiJS 不是一个框架
 
-PixiJS is a rendering engine, and it supports additional features such as interaction management that are commonly needed when using a render engine.  But it is not a framework like Unity or Phaser.  Frameworks are designed to do all the things you'd need to do when building a game - user settings management, music playback, object scripting, art pipeline management... the list goes on.  PixiJS is designed to do one thing really well - render graphical content.  This lets us focus on keeping up with new technology, and makes downloading PixiJS blazingly fast.
+PixiJS 是一个渲染引擎，它支持诸如交互管理之类的附加功能，这些功能在使用渲染引擎时通常是必需的。但它不像 Unity 或 Phaser 那样是一个框架。框架被设计用于构建游戏时需要做的所有事情 - 用户设置管理，音乐播放，对象脚本，艺术资源管理... 列举不胜枚举。PixiJS 的设计目标是非常出色地渲染图形内容。这使我们能够专注于跟上新技术的发展，并使 PixiJS 的下载速度非常快。
 
-## ... A 3D Renderer
+## 一个 3D 渲染器
 
-PixiJS is built for 2D.  Platformers, adventure games, interactive ads, custom data visualization... all good.  But if you want to render 3D models, you might want to check out [babylon.js](https://www.babylonjs.com) or [three.js](https://threejs.org).
+PixiJS 是专为 2D 而构建的。平台游戏，冒险游戏，互动广告，自定义数据可视化... 都没问题。但如果你想渲染 3D 模型，你可能想看看 [babylon.js](https://www.babylonjs.com) 或 [three.js](https://threejs.org)。
 
-## ... A Mobile App
+##  一个移动应用
 
-If you're looking to build mobile games, you can do it with PixiJS, but you'll need to use a deployment system like [Apache Cordova](https://cordova.apache.org) if you want access to native bindings.  We don't provide access to the camera, location services, notifications, etc.
+如果你想要构建移动游戏，你可以使用 PixiJS，但如果你想要访问本地绑定，你将需要使用类似 [Apache Cordova](https://cordova.apache.org) 的部署系统。我们不提供访问摄像头、位置服务、通知等功能。
 
-## ... A UI Library
+##  一个 UI 库
 
-Building a truly generic UI system is a huge challenge, as anyone who has worked with Unity's UI tools can attest.  We've chosen to avoid the complexity to stay true to our core focus on speed.  While you can certainly build your own UI using PixiJS's scene graph and interaction manager, we don't ship with a UI library out of the box.
+构建一个真正通用的 UI 系统是一个巨大的挑战，任何使用 Unity 的 UI 工具的人都能证明这一点。我们选择避免这种复杂性，以保持我们对速度的核心关注。虽然你可以使用 PixiJS 的场景图和交互管理器构建自己的 UI，但我们不提供内置的 UI 库。
 
-## ... A Data Store
+## 一个数据存储库
 
-There are many techniques and technologies that you can use to store settings, scores, and other data.  Cookies, Web Storage, server-based storage... there are many solutions, each with advantages and disadvantages.  You can use any of them with PixiJS, but we don't provide tools to do so.
+有许多技术和技术可以用于存储设置、分数和其他数据。Cookies、Web 存储、服务器端存储... 有许多解决方案，每个解决方案都有其优缺点。你可以使用其中任何一种与 PixiJS 配合使用，但我们不提供处理这些的工具。
 
-## ... An Audio Library
+## 一个音频库
 
-At least, not out of the box.  Again, web audio technology is a constantly evolving challenge, with constantly changing rules and requirements across many browsers.  There are a number of dedicated web audio libraries (such as [Howler.js](https://howlerjs.com) that can be used with PixiJS to play sound effects and music.  Alternatively, the [PixiJS Sound plugin](https://github.com/pixijs/pixi-sound) is designed to work well with PixiJS.
+至少，不是内置的。再次强调，Web 音频技术是一个不断发展的挑战，在许多浏览器中，规则和要求不断变化。有许多专用的 Web 音频库（如 [Howler.js](https://howlerjs.com)），可以与 PixiJS 一起用于播放音效和音乐。或者，[PixiJS 音频插件](https://github.com/pixijs/pixi-sound) 也是为 PixiJS 设计的。
 
-## ... A Development Environment
+## 一个开发环境
 
-There are a number of tools that are useful for building 2D art and games that you might expect to be a part of PixiJS, but we're a rendering engine, not a development environment.  Packing sprite sheets, processing images, building mipmaps or Retina-ready sprites - there are great standalone tools for this type of tooling.  Where appropriate throughout the guides, we'll point you to tools that may be useful.
+有许多工具对于构建 2D 美术和游戏很有用，你可能期望这些工具是 PixiJS 的一部分，但我们是一个渲染引擎，而不是开发环境。打包精灵表、处理图像、构建 mipmaps 或支持 Retina 的精灵 - 这些都有很好的独立工具来实现。在本指南中，我们会指向可能有用的工具。
 
-## So Is PixiJS Right For Me?
+## 那么 PixiJS 适合我吗？
 
-Only you know!  If you're looking for a tightly focused, fast and efficient rendering engine for your next web-based project, PixiJS is likely a great fit.
+只有你自己知道！如果你正在寻找一个专注、快速和高效的渲染引擎，用于你的下一个基于 web 的项目，那么 PixiJS 很可能非常适合。
 
-If you need a full game development framework, with native bindings and a rich UI library, you may want to explore other options.  
+如果你需要一个完整的游戏开发框架，带有本地绑定和丰富的 UI 库，你可能希望探索其他选项。
 
-Or you may not.  It can be faster and easier to build just the subset of a full framework that your project needs than it can be to digest a monolithic API with bells and whistles you don't need.  There are hundreds of complex, rich games and visual projects that use PixiJS for rendering, with plugins or custom code to add the UI and sound effects.  There are benefits to both approaches.  Regardless, we hope you have a better feel for what PixiJS can (and cannot!) offer your project.
+或者也可能不需要。只构建你的项目需要的完整框架子集，可能比消化一个带有不需要的花里胡哨功能的单体 API 更快更容易。有数以百计的复杂、丰富的游戏和视觉项目使用 PixiJS 进行渲染，并配合插件或自定义代码添加 UI 和音效。这两种方法都有优势。不管怎样，我们希望你对 PixiJS 能够（或不能够！）为你的项目提供什么有了更好的了解。
+

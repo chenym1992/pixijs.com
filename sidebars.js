@@ -18,7 +18,7 @@ const sidebars = {
         'guides/index',
         {
             type: 'category',
-            label: 'Basics',
+            label: '基础',
             collapsed: true,
             items: [
                 'guides/basics/what-pixijs-is',
@@ -31,7 +31,7 @@ const sidebars = {
         },
         {
             type: 'category',
-            label: 'Components',
+            label: '组件',
             collapsed: true,
             items: [
                 'guides/components/assets',
@@ -47,13 +47,13 @@ const sidebars = {
         },
         {
             type: 'category',
-            label: 'Production',
+            label: '生产',
             collapsed: true,
             items: ['guides/production/performance-tips'],
         },
         {
             type: 'category',
-            label: 'Migrations',
+            label: '迁移',
             collapsed: true,
             items: ['guides/migrations/upgrading', 'guides/migrations/v7', 'guides/migrations/v6', 'guides/migrations/v5'],
         },
