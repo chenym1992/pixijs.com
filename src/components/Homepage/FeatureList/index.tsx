@@ -1,6 +1,7 @@
-import styles from './index.module.scss';
-import features from './features.json';
 import { useInView } from 'react-intersection-observer';
+
+import features from './features.json';
+import styles from './index.module.scss';
 
 export default function FeatureList(): JSX.Element
 {
@@ -26,7 +27,7 @@ export default function FeatureList(): JSX.Element
                             } as any
                         }
                     >
-                        PixiJS Features
+                        PixiJS 特点
                     </h2>
                 )}
             </div>

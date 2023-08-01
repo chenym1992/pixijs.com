@@ -32,7 +32,7 @@ export default function TestimonialCarousel(): JSX.Element
 
     return (
         <div className={`${styles.testimonialsSection} padding-vert--lg`}>
-            <p className={styles.carouselText}>A mature solution for hundreds of global brands</p>
+            <p className={styles.carouselText}>成熟的解决方案，适用于数百个全球品牌</p>
             <div style={{ '--carousel-amount': brands.length } as any} className={styles.carouselWrapper}>
                 <div className={`col col--12 ${styles.carousel}`}>
                     {[...brands, ...brands].map((brand, index) => (

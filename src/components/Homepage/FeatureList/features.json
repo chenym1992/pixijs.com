@@ -1,74 +1,74 @@
 [
     {
         "icon": "/images/features/feature-multiplatform.png",
-        "heading": "Multi-platform Support",
-        "description": "Interactive, visually compelling content on desktop, mobile and beyond, all reached with a single codebase to deliver transferable experiences.",
+        "heading": "多平台支持",
+        "description": "通过单一代码库，实现在桌面、移动设备等各种平台上交互式、视觉上吸引人的内容，以提供可转移的体验。",
         "data-anim": "feature-r-in"
     },
     {
         "icon": "/images/features/feature-type.png",
-        "heading": "Advanced Text Rendering",
-        "description": "Beautiful anti-aliased text at native and retina resolutions means that Pixi copy is as easy on the eye as it is on any other delivery method.",
+        "heading": "高级文本渲染",
+        "description": "在本地和视网膜分辨率上呈现出漂亮的抗锯齿文本，使 Pixi 复制不仅对眼睛友好，也适用于其他任何传递方式。",
         "data-anim": "feature-l-in"
     },
     {
         "icon": "/images/features/feature-tinting-blending.png",
-        "heading": "Tinting & Blending Modes",
-        "description": "Designers and clients will be thrilled by Photoshop quality blending and colour modes.",
+        "heading": "着色和混合模式",
+        "description": "设计师和客户将对 Photoshop 质量的混合和颜色模式感到兴奋。",
         "data-anim": "feature-r-in"
     },
     {
         "icon": "/images/features/feature-scenegraph.png",
-        "heading": "Full Scene Graph",
-        "description": "Organise your objects in hierarchical trees, with parent-child relationships.",
+        "heading": "完整的场景图",
+        "description": "通过父子关系在层次树中组织对象。",
         "data-anim": "feature-l-in"
     },
     {
         "icon": "/images/features/feature-sprite-sheet.png",
-        "heading": "Sprite Sheet Support",
-        "description": "PixiJS caters for a range of sprite sheet formats and includes advanced support for features like trimming and rotational packing.",
+        "heading": "精灵表支持",
+        "description": "PixiJS 支持多种精灵表格式，并包括对修剪和旋转打包等功能的高级支持。",
         "data-anim": "feature-r-in"
     },
     {
         "icon": "/images/features/feature-canvas.png",
-        "heading": "Renderer Auto-detect",
-        "description": "Certain, older platforms may not be able to use WebGL. Not a problem with PixiJS as Canvas fallback is seamless and automated.",
+        "heading": "渲染器自动检测",
+        "description": "某些较旧的平台可能无法使用 WebGL。但对于 PixiJS 来说，Canvas 回退是无缝且自动化的。",
         "data-anim": "feature-l-in"
     },
     {
         "icon": "/images/features/feature-asset-loader.png",
-        "heading": "Asset Loader",
-        "description": "Sprite-sheets, graphics, fonts, animation data (soon to have Adobe Animate support). All your incoming assets can be loaded and handled by PixiJS.",
+        "heading": "资源加载器",
+        "description": "可以通过 PixiJS 加载和处理所有传入的资源，包括精灵表、图形、字体、动画数据（即将支持 Adobe Animate）。",
         "data-anim": "feature-r-in"
     },
     {
         "icon": "/images/features/feature-apps.png",
-        "heading": "Deploy into Apps",
-        "description": "Use technologies such as Cordova to rapidly deploy your Pixi project as an App. Superb for both concepting and full delivery.",
+        "heading": "部署到应用程序",
+        "description": "使用 Cordova 等技术，将 Pixi 项目快速部署为应用程序。非常适合概念设计和完整交付。",
         "data-anim": "feature-l-in"
     },
     {
         "icon": "/images/features/feature-api.png",
-        "heading": "Easy API",
-        "description": "Designed to be intuitive and easy to pick up. Developers old and new will find themselves right at home with its simple yet powerful API.",
+        "heading": "简单的 API",
+        "description": "设计成直观且易于上手。老手和新手开发人员都会在其简单而强大的 API 中感到如鱼得水。",
         "data-anim": "feature-r-in"
     },
     {
         "icon": "/images/features/feature-accessibility.png",
-        "heading": "Accessibility",
-        "description": "PixiJS is an inclusive technology and all content can be made to be screen reader accessible with ease. The only WebGL renderer out there that does.",
+        "heading": "无障碍性",
+        "description": "PixiJS 是一项包容性技术，所有内容都可以轻松地实现屏幕阅读器的可访问性。它是目前唯一支持 WebGL 渲染器的技术。",
         "data-anim": "feature-l-in"
     },
     {
         "icon": "/images/features/feature-filters.png",
-        "heading": "WebGL Filters",
-        "description": "Use and create your own spectacular WebGL filters and shaders to give your projects next-level visual fidelity and performance.",
+        "heading": "WebGL 滤镜",
+        "description": "使用和创建自己的壮观 WebGL 滤镜和着色器，为您的项目带来更高级的视觉保真度和性能。",
         "data-anim": "feature-r-in"
     },
     {
         "icon": "/images/features/feature-multitouch.png",
-        "heading": "Multi-touch Interactivity",
-        "description": "True multi-touch input and tracking means that you can create interactions such as pinch-to-scale that give audiences native feeling experiences.",
+        "heading": "多点触控交互",
+        "description": "真正的多点触控输入和跟踪意味着您可以创建诸如捏合缩放等交互，为观众带来本地感觉的体验。",
         "data-anim": "feature-l-in"
     }
 ]

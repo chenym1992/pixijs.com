@@ -1,6 +1,7 @@
 import clsx from 'clsx';
-import styles from './index.module.scss';
+
 import HomeCTA from '../HomeCTA';
+import styles from './index.module.scss';
 
 export default function HeroHeader(): JSX.Element
 {
@@ -9,14 +10,12 @@ export default function HeroHeader(): JSX.Element
             <iframe className={styles.heroBackground} src="/header/index.html"></iframe>
             <div className="container">
                 <img className={styles.heroLogo} src="/images/logo.svg" alt="" />
-                <h1 className="hero__subtitle">The HTML5 Creation Engine</h1>
-                <h4 className="hero__subsubtitle">
-                    Create beautiful digital content with the fastest, most flexible 2D WebGL renderer.
-                </h4>
+                <h1 className="hero__subtitle">HTML5创作引擎</h1>
+                <h4 className="hero__subsubtitle">使用最快、最灵活的2D WebGL渲染器创建美丽的数字内容。</h4>
                 <div className="buttonRow">
-                    <HomeCTA label="Download" link="https://github.com/pixijs/pixijs/releases" />
+                    <HomeCTA label="下载" link="https://github.com/pixijs/pixijs/releases" />
                     &nbsp;
-                    <HomeCTA label="Get Started" link="/tutorial" white={true} outline={true} />
+                    <HomeCTA label="开始使用" link="/tutorial" white={true} outline={true} />
                 </div>
             </div>
         </header>

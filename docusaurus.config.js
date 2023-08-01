@@ -27,8 +27,8 @@ const config = {
     // metadata like html lang. For example, if your site is Chinese, you may want
     // to replace "en" with "zh-Hans".
     i18n: {
-        defaultLocale: 'en',
-        locales: ['en'],
+        defaultLocale: 'zh-Hans',
+        locales: ['zh-Hans'],
     },
 
     presets: [
@@ -91,13 +91,13 @@ const config = {
                 items: [
                     {
                         type: 'dropdown',
-                        label: 'Docs',
+                        label: '文档',
                         position: 'left',
                         items: [
                             {
                                 type: 'doc',
                                 docId: 'guides/index',
-                                label: 'Guides',
+                                label: '指南',
                             },
                             // TODO: add tutorial back in
                             // {
@@ -107,7 +107,7 @@ const config = {
                             {
                                 type: 'doc',
                                 docId: 'examples/index',
-                                label: 'Examples',
+                                label: '示例',
                             },
                         ],
                     },
@@ -125,17 +125,17 @@ const config = {
                     // },
                     {
                         to: 'playground',
-                        label: 'Playground',
+                        label: '沙盒',
                         position: 'left',
                     },
                     {
                         type: 'dropdown',
-                        label: 'Ecosystem',
+                        label: '生态系统',
                         position: 'left',
                         items: [
                             {
                                 type: 'html',
-                                value: 'Libraries',
+                                value: '库',
                                 className: 'nav-section-heading',
                             },
                             {
@@ -147,19 +147,19 @@ const config = {
                                 href: 'https://github.com/pixijs/spine',
                             },
                             {
-                                label: 'Filters',
+                                label: '滤镜',
                                 href: 'https://github.com/pixijs/filters',
                             },
                             {
-                                label: 'Sound',
+                                label: '音频',
                                 href: 'https://github.com/pixijs/sound',
                             },
                             {
-                                label: 'Animate',
+                                label: '动画',
                                 href: 'https://github.com/pixijs/animate',
                             },
                             {
-                                label: 'Lights',
+                                label: '光照',
                                 href: 'https://github.com/pixijs/lights',
                             },
                             {
@@ -204,35 +204,35 @@ const config = {
                     },
                     {
                         type: 'dropdown',
-                        label: 'About',
+                        label: '关于',
                         position: 'left',
                         items: [
                             {
-                                label: 'Team',
+                                label: '团队',
                                 to: 'team',
                             },
                             {
                                 type: 'doc',
-                                label: 'FAQ',
+                                label: '常见问题',
                                 docId: 'faq',
                             },
                             {
-                                label: 'Community Guide',
+                                label: '社区指南',
                                 href: 'https://github.com/pixijs/pixijs/blob/dev/.github/CONTRIBUTING.md',
                             },
                             {
-                                label: 'Code of Conduct',
+                                label: '行为准则',
                                 href: 'https://github.com/pixijs/pixijs/blob/dev/.github/CODE_OF_CONDUCT.md',
                             },
                         ],
                     },
                     {
                         to: 'blog',
-                        label: 'Blog',
+                        label: '博客',
                         position: 'left',
                     },
                     {
-                        label: 'Sponsor',
+                        label: '赞助',
                         position: 'left',
                         href: 'https://opencollective.com/pixijs',
                     },
@@ -243,7 +243,7 @@ const config = {
                         dropdownItemsAfter: [
                             {
                                 to: '/versions',
-                                label: 'All versions',
+                                label: '所有版本',
                             },
                         ],
                     },
@@ -275,7 +275,7 @@ const config = {
                     width: 100,
                 },
                 // eslint-disable-next-line max-len
-                copyright: `© ${new Date().getFullYear()} PixiJS.<br>A labour of love built by the <a href="/team">PixiJS team</a>.`,
+                copyright: `© ${new Date().getFullYear()} PixiJS.<br>由 <a href="/team">PixiJS 团队</a>倾心打造.<a target="_blank" href="https://github.com/chenym1992">@chenym1992</a>翻译`,
             },
             image: 'images/ogimage.png',
             prism: {

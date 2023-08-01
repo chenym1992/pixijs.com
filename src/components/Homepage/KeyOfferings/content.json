@@ -1,14 +1,14 @@
 [
     {
-        "heading": "Fast",
-        "description": "PixiJS' strength is speed. When it comes to 2D rendering, PixiJS is the fastest there is."
+        "heading": "快速",
+        "description": "PixiJS的优势在于速度。在2D渲染方面，PixiJS是最快的。"
     },
     {
-        "heading": "Flexible",
-        "description": "Friendly, feature-rich API lets PixiJS take care of the fundamentals whilst you focus on producing incredible multiplatform experiences."
+        "heading": "灵活",
+        "description": "友好、功能丰富的API让PixiJS处理基础事务，使您能够专注于创建令人难以置信的多平台体验。"
     },
     {
-        "heading": "Free",
-        "description": "PixiJS is and always will be Open Source, with a large and supportive community pushing its growth and evolution."
+        "heading": "免费",
+        "description": "PixiJS是开源的，并且始终是开源的，有一个庞大而支持性强的社区推动其发展和演进。"
     }
 ]

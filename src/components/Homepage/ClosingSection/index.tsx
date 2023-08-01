@@ -1,6 +1,7 @@
+import { useInView } from 'react-intersection-observer';
+
 import HomeCTA from '../HomeCTA';
 import styles from './index.module.scss';
-import { useInView } from 'react-intersection-observer';
 
 const animShortUp = (duration: number, delay: number) => ({
     opacity: 0,
@@ -20,23 +21,23 @@ export default function ClosingSection(): JSX.Element
                 {inView && (
                     <>
                         <h3 className="short-up-anim" style={animShortUp(0.3, 0.25)}>
-                            Elevate your Traditional HTML5 Techniques
+                            提升传统的 HTML5 技术
                         </h3>
                         <h5 className="short-up-anim" style={animShortUp(0.3, 0.4)}>
-                            Unbeatable performance, intuitive API, globally used and battle­tested.
+                            无与伦比的性能，直观的 API，全球范围内被广泛使用和经过实战验证。
                         </h5>
                         <div className="buttonRow">
                             <HomeCTA
                                 anim="short-up-anim"
                                 style={animShortUp(0.3, 0.55)}
-                                label="Download"
+                                label="下载"
                                 link="https://github.com/pixijs/pixijs/releases"
                             />
                             &nbsp;
                             <HomeCTA
                                 anim="short-up-anim"
                                 style={animShortUp(0.3, 0.7)}
-                                label="Get Started"
+                                label="开始使用"
                                 link="/tutorial"
                                 outline={true}
                             />
