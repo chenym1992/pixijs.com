@@ -1,22 +1,21 @@
-# PixiJS Guides
-## The Assets package
+# PixiJS指南
+## 资源包
 
-The Assets package is a modern replacement for the old `PIXI.Loader` class. It is a promise-based resource management solution that will download, cache and parse your assets into something you can use. The downloads can be simultaneous and in the background, meaning faster startup times for your app, the cache ensures that you never download the same asset twice and the extensible parser system allows you to easily extend and customize the process to your needs.
+资源包是旧的`PIXI.Loader`类的现代替代品。它是一个基于Promise的资源管理解决方案，可以下载、缓存和解析您的资源，使其可供使用。下载可以同时进行并在后台进行，这意味着应用程序启动时间更快；缓存确保您不会重复下载相同的资源；可扩展的解析器系统使您可以轻松扩展和自定义处理过程以满足您的需求。
+
+## 入门指南
+
+在PixiJS 6.x版本中，`@pixi/assets`包不包含在PixiJS中，必须外部添加，但在版本7中将与PixiJS集成。负责所有繁重工作的类名为`AssetsClass`，但您不需要创建自己的实例，因为您可以在`PIXI.Assets`中找到一个可用的实例。该包在很大程度上依赖于现代浏览器都支持的JavaScript Promises，但是，如果您的目标浏览器不支持Promises，您应该考虑[使用polyfill](https://github.com/zloirock/core-js#ecmascript-promise)来支持它们。
 
 
-## Getting started
-
-The `@pixi/assets` package doesn't come bundled with PixiJS in version 6.x and must be added externally, however it will become integrated with version 7. The class that does all the heavy lifting is called `AssetsClass` but you don't need to create your own instance since you will find one ready to use in `PIXI.Assets`.
-This package relies heavily on JavaScript Promises that all modern browsers support, however, if your target browser [doesn't support promises](https://caniuse.com/promises) you should look into [polyfilling them](https://github.com/zloirock/core-js#ecmascript-promise).
-
-## Making our first Assets Promise
-To quickly use the `PIXI.Assets` instance, you just need to call `PIXI.Assets.load` and pass in an asset. This will return a promise that when resolved will yield the value you seek.
-In this example, we will load a texture and then turn it into a sprite.
+## 创建我们的第一个Assets Promise
+要快速使用`PIXI.Assets`实例，只需调用`PIXI.Assets.load`并传入一个资源即可。这将返回一个Promise，当解析完成时，将返回您所需的值。
+在这个例子中，我们将加载一个纹理，然后将其转换为精灵。
 
 <div class="responsive-4-3"><iframe src="https://pixijs.io/examples/?embed=1&showcode=1#/assets/promise.js"></iframe></div>
 
-One very important thing to keep in mind while using `Assets` is that all requests are cached and if the URL is the same, the promise returned will also be the same.
-To show it in code:
+在使用`Assets`时需要牢记的一个非常重要的事情是，所有请求都会被缓存，如果URL相同，返回的Promise也将相同。
+以代码形式展示：
 ```js
 promise1 = PIXI.Assets.load('bunny.png')
 promise2 = PIXI.Assets.load('bunny.png')
@@ -24,22 +23,24 @@ promise2 = PIXI.Assets.load('bunny.png')
 //promise1 === promise2
 ```
 
-Out of the box, the following assets types can be loaded without the need for external plugins:
+开箱即用，以下类型的资源可以在不需要外部插件的情况下加载：
 
-- Textures (`avif`, `webp`, `png`, `jpg`, `gif`)
-- Sprite sheets (`json`)
-- Bitmap fonts (`xml`, `fnt`, `txt`)
-- Web fonts (`ttf`, `woff`, `woff2`)
-- Json files (`json`)
-- Text files (`txt`)
+- 纹理（`avif`、`webp`、`png`、`jpg`、`gif`）
+- 精灵表（`json`）
+- 位图字体（`xml`、`fnt`、`txt`）
+- Web字体（`ttf`、`woff`、`woff2`）
+- Json文件（`json`）
+- 文本文件（`txt`）
 
-More types can be added fairly easily by creating additional loader parsers.
+通过创建额外的加载器解析器，可以相对容易地添加更多类型的资源。
 
-## Warning about solved promises
 
-When an asset is downloaded, it is cached as a promise inside the `Assets` instance and if you try to download it again you will get a reference to the already resolved promise.
-However promise handlers `.then(...)`/`.catch(...)`/`.finally(...)` are always asynchronous, this means that even if a promise was already resolved the code below the `.then(...)`/`.catch(...)`/`.finally(...)` will execute before the code inside them.
-See this example:
+## 关于已解决的Promise的警告
+
+当下载一个资源时，它会作为一个Promise被缓存在`Assets`实例中，如果您尝试再次下载它，您将获得对已解决的Promise的引用。
+然而，Promise处理程序`.then(...)`/`.catch(...)`/`.finally(...)`总是异步的，这意味着即使一个Promise已经解决，`.then(...)`/`.catch(...)`/`.finally(...)`中的代码之后的代码也会在其中的代码之前执行。
+看一下这个例子：
+
 
 ```js
 console.log(1);
@@ -52,14 +53,14 @@ console.log(3);
 // 2
 ```
 
-To learn more about why this happens you will need to learn about [Microtasks](https://javascript.info/microtask-queue), however, using async functions should mitigate this problem.
+要了解更多关于为什么会发生这种情况，您需要学习有关微任务（Microtasks）的知识，然而，使用异步函数应该可以减轻这个问题。
 
+## 使用Async/Await
 
-## Using Async/Await
+有一种更直观、更易读的处理Promise的方式：`async`/`await`。
 
-There is a way to work with promises that is more intuitive and easier to read: `async`/`await`.
+要使用它，我们首先需要创建一个函数或方法，并将其标记为`async`。
 
-To use it we first need to create a function/method and mark it as `async`.
 
 ```js
 async function test() {
@@ -67,29 +68,29 @@ async function test() {
 }
 ```
 
-This function now wraps the return value in a promise and allows us to use the `await` keyword before a promise to halt the execution of the code until it is resolved and gives us the value.
+这个函数现在将返回值包装在一个 Promise 中，并且允许我们在一个 Promise 前使用 `await` 关键字，以便在 Promise 被解析之前暂停代码的执行，并给我们返回值。
 
-See this example:
+看下面这个例子：
 
 <div class="responsive-4-3"><iframe src="https://pixijs.io/examples/?embed=1&showcode=1#/assets/async.js"></iframe></div>
 
-The `texture` variable now is not a promise but the resolved texture that resulted after waiting for this promise to resolve.
+现在，`texture` 变量不再是一个 Promise，而是在等待该 Promise 解析后得到的已解析纹理。
 
 ```js
 const texture = await PIXI.Assets.load('examples/assets/bunny.png');
 ```
 
-This allows us to write more readable code without falling into callback hell and to better think when our program halts and yields.
+这使我们能够编写更易读的代码，避免陷入回调地狱，并且能够更好地思考当我们的程序暂停和产生结果时的情况。
 
-## Loading multiple assets
+## 加载多个资源
 
-We can add assets to the cache and then load them all simultaneously by using `PIXI.Assets.add(...)` and then calling `PIXI.Assets.load(...)` with all the keys you want to have loaded.
-See the following example:
+我们可以将资源添加到缓存中，然后通过使用 `PIXI.Assets.add(...)` 并调用带有您想要加载的所有键的 `PIXI.Assets.load(...)` 来同时加载它们。
+请参考以下示例：
 
 <div class="responsive-4-3"><iframe src="https://pixijs.io/examples/?embed=1&showcode=1#/assets/multiple.js"></iframe></div>
 
-However, if you want to take full advantage of `@pixi/Assets` you should use bundles.
-Bundles are just a way to group assets together and can be added manually by calling `PIXI.Assets.addBundle(...)`/`PIXI.Assets.loadBundle(...)`.
+然而，如果您想充分利用 `@pixi/Assets`，您应该使用 bundles（捆绑包）。
+Bundles 只是一种将资源分组的方法，可以通过调用 `PIXI.Assets.addBundle(...)` 或 `PIXI.Assets.loadBundle(...)` 来手动添加。
 
 ```js
   PIXI.Assets.addBundle('animals', {
@@ -101,8 +102,8 @@ Bundles are just a way to group assets together and can be added manually by cal
  const assets = await PIXI.Assets.loadBundle('animals');
 ```
 
-However, the best way to handle bundles is to use a manifest and call `PIXI.Assets.init({manifest})` with said manifest (or even better, an URL pointing to it).
-Splitting our assets into bundles that correspond to screens or stages of our app will come in handy for loading in the background while the user is using the app instead of locking them in a single monolithic loading screen.
+然而，处理 bundles（捆绑包）的最佳方式是使用清单（manifest），并使用该清单（或者更好的是，指向清单的 URL）调用 `PIXI.Assets.init({manifest})`。
+将我们的资源分成与应用程序的屏幕或阶段相对应的 bundles 将会非常方便，可以在用户使用应用程序时在后台加载，而不是将用户锁定在单一的庞大加载屏幕中。
 
 ```json
 {
@@ -140,22 +141,22 @@ Splitting our assets into bundles that correspond to screens or stages of our ap
 PIXI.Assets.init({manifest: "path/manifest.json"});
 ```
 
-Beware that **you can only call `init` once**.
+请注意，**只能调用一次 `init`**。
 
-Remember there is no downside in repeating URLs since they will all be cached, so if you need the same asset in two bundles you can duplicate the request without any extra cost!
+请记住，重复的 URL 没有任何副作用，因为它们都会被缓存，所以如果您需要在两个 bundles 中使用相同的资源，您可以在没有任何额外成本的情况下复制请求！
 
-## Background loading
+## 后台加载
 
-The old approach to loading was to use `PIXI.Loader` to load all your assets at the beginning of your app, but users are less patient now and want content to be instantly available so the practices are moving towards loading the bare minimum needed to show the user some content and, while they are interacting with that, we keep loading the following content in the background.
+以前加载的方法是在应用程序开始时使用 `PIXI.Loader` 加载所有资源，但现在的用户更加没有耐心，希望立即获取内容，因此实践方法正在转向加载所需的最低限度的内容，以向用户显示一些内容，当他们与内容交互时，我们继续在后台加载接下来的内容。
 
-Luckily, `@pixi/assets` has us covered with a system that allows us to load everything in the background and in case we need some assets right now, bump them to the top of the queue so we can minimize loading times.
+幸运的是，`@pixi/assets` 为我们提供了一个系统，允许我们在后台加载所有内容，并且在我们立即需要一些资源的情况下，将它们提升到队列的顶部，以便我们可以最小化加载时间。
 
-To achieve this, we have the methods `PIXI.Assets.backgroundLoad(...)` and `PIXI.Assets.backgroundLoadBundle(...)` that will passively begin to load these assets in the background. So when you finally come to loading them you will get a promise that resolves to the loaded assets immediately.
+为了实现这一点，我们有 `PIXI.Assets.backgroundLoad(...)` 和 `PIXI.Assets.backgroundLoadBundle(...)` 方法，它们将被动地开始在后台加载这些资源。因此，当您最终开始加载它们时，您将立即获得一个解析为加载资源的 promise。
 
-When you finally need the assets to show, you call the usual `PIXI.Assets.load(...)` or `PIXI.Assets.loadBundle(...)` and you will get the corresponding promise.
+当您最终需要这些资源以显示时，您调用通常的 `PIXI.Assets.load(...)` 或 `PIXI.Assets.loadBundle(...)`，然后您将获得相应的 promise。
 
-The best way to do this is using bundles, see the following example:
+最好的方法是使用 bundles，参见以下示例：
 
 <div class="responsive-4-3"><iframe src="https://pixijs.io/examples/?embed=1&showcode=1#/assets/bundle.js"></iframe></div>
 
-We create one bundle for each screen our game will have and set them all to start downloading at the beginning of our app. If the user progresses slowly enough in our app then they should never get to see a loading screen after the first one!
+我们为游戏中的每个屏幕创建一个 bundle，并在应用程序开始时将它们全部设置为开始下载。如果用户在我们的应用程序中的进度足够缓慢，他们应该永远不会在第一个加载屏幕之后再看到加载屏幕！
