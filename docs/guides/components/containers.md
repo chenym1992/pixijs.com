@@ -1,29 +1,29 @@
-# Containers
+# 容器（Containers）
 
-The [Container](https://pixijs.download/release/docs/PIXI.Container.html) class provides a simple display object that does what its name implies - collect a set of child objects together.  But beyond grouping objects, containers have a few uses that you should be aware of.
+[容器（Container）](https://pixijs.download/release/docs/PIXI.Container.html) 类提供了一个简单的显示对象，其功能与其名称暗示的一样 - 将一组子对象收集在一起。但除了分组对象外，容器还有一些用途需要您了解。
 
-## Containers as Groups
+## 容器作为分组
 
-Almost every type of display object is also derived from Container - even Sprites!  This means that in many cases you can create a parent-child hierarchy with the objects you want to render.
+几乎每种类型的显示对象都派生自容器 - 即使是精灵（Sprites）！这意味着在许多情况下，您可以创建要渲染的对象的父子层次结构。
 
-However, it's a good idea _not_ to do this.  Standalone Container objects are **very** cheap to render, and having a proper hierarchy of Container objects, each containing one or more renderable objects, provides flexibility in rendering order.  It also future-proofs your code, as when you need to add an additional object to a branch of the tree, your animation logic doesn't need to change - just drop the new object into the proper Container, and your logic moves the Container with no changes to your code.
+然而，最好的做法是**不要**这样做。独立的容器对象非常**廉价**，且具有适当的容器层次结构，每个容器都包含一个或多个可渲染的对象，可以提供灵活性的渲染顺序。这还可以将您的代码未来化，因为当您需要向树的某个分支添加其他对象时，您的动画逻辑不需要更改 - 只需将新对象放入适当的容器中，您的逻辑将容器移动，而无需更改代码。
 
-So that's the primary use for Containers - as groups of renderable objects in a hierarchy.
+因此，这是容器的主要用途 - 作为层次结构中的可渲染对象的分组。
 
-Check out the [container example code](/examples/basic/container).
+请查看[容器示例代码](/examples/basic/container)。
 
-## Masking
+## 遮罩（Masking）
 
-Another common use for Container objects is as hosts for masked content.  "Masking" is a technique where parts of your scene graph are only visible within a given area.
+容器对象的另一个常见用途是用作遮罩内容的主机。"遮罩"是一种技术，其中您的场景图的某些部分仅在给定区域内可见。
 
-Think of a pop-up window.  It has a frame made of one or more Sprites, then has a scrollable content area that hides content outside the frame.  A Container plus a mask makes that scrollable area easy to implement.  Add the Container, set its `mask` property to a Graphics object with a rect, and add the text, image, etc. content you want to display as children of that masked Container.  Any content that extends beyond the rectangular mask will simply not be drawn.  Move the contents of the Container to scroll as desired.
+想象一个弹出窗口。它有一个由一个或多个精灵构成的框架，然后有一个可以滚动的内容区域，该区域在框架外隐藏内容。容器加上一个遮罩使得可滚动区域易于实现。添加容器，将其`mask`属性设置为具有矩形的图形对象，并将文本、图像等内容作为遮罩容器的子项添加。超出矩形遮罩的任何内容都将被简单地省略。按需移动容器的内容以滚动。
 
 ```javascript
-// Create the application helper and add its render target to the page
+// 创建应用程序助手并将其渲染目标添加到页面上
 let app = new PIXI.Application({ width: 640, height: 360 });
 document.body.appendChild(app.view);
 
-// Create window frame
+// 创建窗口框架
 let frame = new PIXI.Graphics();
 frame.beginFill(0x666666);
 frame.lineStyle({ color: 0xffffff, width: 4, alignment: 0 });
@@ -31,25 +31,25 @@ frame.drawRect(0, 0, 208, 208);
 frame.position.set(320 - 104, 180 - 104);
 app.stage.addChild(frame);
 
-// Create a graphics object to define our mask
+// 创建用于定义遮罩的图形对象
 let mask = new PIXI.Graphics();
-// Add the rectangular area to show
+// 添加要显示的矩形区域
 mask.beginFill(0xffffff);
 mask.drawRect(0,0,200,200);
 mask.endFill();
 
-// Add container that will hold our masked content
+// 添加将容纳我们遮罩内容的容器
 let maskContainer = new PIXI.Container();
-// Set the mask to use our graphics object from above
+// 将遮罩设置为使用上述图形对象
 maskContainer.mask = mask;
-// Add the mask as a child, so that the mask is positioned relative to its parent
+// 将遮罩作为子项添加，以便遮罩相对于其父项定位
 maskContainer.addChild(mask);
-// Offset by the window's frame width
+// 通过窗口的框架宽度进行偏移
 maskContainer.position.set(4,4);
-// And add the container to the window!
+// 然后将容器添加到窗口中！
 frame.addChild(maskContainer);
 
-// Create contents for the masked container
+// 为受遮罩容器创建内容
 let text = new PIXI.Text(
   'This text will scroll up and be masked, so you can see how masking works.  Lorem ipsum and all that.\n\n' +
   'You can put anything in the container and it will be masked!',
@@ -63,34 +63,36 @@ let text = new PIXI.Text(
 text.x = 10;
 maskContainer.addChild(text);
 
-// Add a ticker callback to scroll the text up and down
+// 添加一个定时器回调以将文本上下滚动
 let elapsed = 0.0;
 app.ticker.add((delta) => {
-  // Update the text's y coordinate to scroll it
+  // 更新文本的 y 坐标以进行滚动
   elapsed += delta;
   text.y = 10 + -100.0 + Math.cos(elapsed/50.0) * 100.0;
 });
 ```
 
-There are two types of masks supported by PixiJS:
+PixiJS 支持两种遮罩类型：
 
-Use a [Graphics](https://pixijs.download/release/docs/PIXI.Graphics.html) object to create a mask with an arbitrary shape - powerful, but doesn't support anti-aliasing
+使用[图形（Graphics）](https://pixijs.download/release/docs/PIXI.Graphics.html)对象创建具有任意形状的遮罩 - 强大，但不支持反锯齿
 
-Sprite: Use the alpha channel from a [Sprite](https://pixijs.download/release/docs/PIXI.Sprite.html) as your mask, providing anti-aliased edging - _not_ supported on the Canvas renderer
+精灵（Sprite）：使用[精灵（Sprite）](https://pixijs.download/release/docs/PIXI.Sprite.html)的 alpha 通道作为遮罩，提供了反锯齿的边缘 - **不**支持 Canvas 渲染器
 
-## Filtering
+## 过滤（Filtering）
 
-Another common use for Container objects is as hosts for filtered content.  Filters are an advanced, WebGL-only feature that allows PixiJS to perform per-pixel effects like blurring and displacements.  By setting a filter on a Container, the area of the screen the Container encompasses will be processed by the filter after the Container's contents have been rendered.
+容器对象的另一个常见用途是作为过滤内容的主机。过滤器是一种高级、仅在 WebGL 中可用的功能，允许 PixiJS 执行每像素效果，如模糊和位移。通过在容器上设置过滤器，容器所包含的屏幕区域在渲染容器内容后，将通过过滤器进行处理。
 
-Below are list of filters available by default in PixiJS. There is, however, a community repository with [many more filters](https://github.com/pixijs/filters).
+以下是 PixiJS 默认支持的过滤器列表。然而，社区存储库中还有[许多其他过滤器](https://github.com/pixijs/filters)。
 
-| Filter                                                                                 | Description                                                                                                   |
-| ---                                                                                    | ---                                                                                                           |
-| AlphaFilter: `@pixi/filter-alpha`                      | Similar to setting `alpha` property, but flattens the Container instead of applying to children individually. |
-| BlurFilter: `@pixi/filter-blur`                         | Apply a blur effect                                                                                           |
-| ColorMatrixFilter: `@pixi/filter-color-matrix`   | A color matrix is a flexible way to apply more complex tints or color transforms (e.g., sepia tone).          |
-| DisplacementFilter: `@pixi/filter-displacement` | Displacement maps create visual offset pixels, for instance creating a wavy water effect.                     |
-| FXAAFilter: `@pixi/filter-fxaa`                         | Basic FXAA (Fast Approximate Anti-Aliasing) to create smoothing effect.                                       |
-| NoiseFilter: `@pixi/filter-noise`                      | Create random noise (e.g., grain effect).                                                                     |
+| 过滤器                                                                                  | 描述                                                                                                       |
+| ---                                                                                    | ---                                                                                                       |
+| AlphaFilter: `@pixi/filter-alpha`                      | 类似于设置 `alpha` 属性，但会将容器展平，而不是分别应用于子项。 |
+| BlurFilter: `@pixi/filter-blur`                         | 应用模糊效果                                                                                               |
+| ColorMatrixFilter: `@pixi/filter-color-matrix`   | 色彩
 
-_**Important:** Filters should be use somewhat sparingly. They can slow performance and increase memory if used too often in a scene._
+矩阵是一种更灵活的方式，可以应用更复杂的色调或颜色变换（例如，棕褐色）。          |
+| DisplacementFilter: `@pixi/filter-displacement` | 位移映射创建视觉偏移像素，例如创建波浪水效果。                |
+| FXAAFilter: `@pixi/filter-fxaa`                         | 基本的 FXAA（快速近似抗锯齿）以创建平滑效果。                     |
+| NoiseFilter: `@pixi/filter-noise`                      | 创建随机噪声（例如，颗粒效果）。                                                                       |
+
+_**重要提示：** 应谨慎使用过滤器。如果在场景中使用得太频繁，它们可能会降低性能并增加内存使用。_
