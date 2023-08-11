@@ -1,71 +1,71 @@
-# Performance Tips
+# 性能优化提示
 
-### General
+### 总体
 
-- Only optimize when you need to! PixiJS can handle a fair amount of content off the bat
-- Be mindful of the complexity of your scene. The more objects you add the slower things will end up
-- Order can help, for example sprite / graphic / sprite / graphic is slower than sprite / sprite / graphic / graphic
-- Some older mobile devices run things a little slower. Passing in the option `useContextAlpha: false` and `antialias: false` to the Renderer or Application can help with performance
-- Culling is disabled by default as it's often better to do this at an application level or set objects to be `cullable = true`. If you are GPU-bound it will improve performance; if you are CPU-bound it will degrade performance
+- 只在需要时进行优化！PixiJS 一开始就能处理相当多的内容
+- 注意场景的复杂性。您添加的对象越多，速度就会变慢
+- 排序可能有帮助，例如精灵 / 图形 / 精灵 / 图形 比精灵 / 精灵 / 图形 / 图形 更慢
+- 一些较旧的移动设备运行速度稍慢。将选项 `useContextAlpha: false` 和 `antialias: false` 传递给渲染器或应用程序可以提高性能
+- 默认情况下，裁剪被禁用，因为在应用程序级别进行此操作通常更好，或者将对象设置为 `cullable = true`。如果您的 GPU 负载较重，它会提高性能；如果您的 CPU 负载较重，它会降低性能
 
-### Sprites
+### 精灵（Sprites）
 
-- Use Spritesheets where possible to minimize total textures
-- Sprites can be batched with up to 16 different textures (dependent on hardware)
-- This is the fastest way to render content
-- On older devices use smaller low resolution textures
-- Add the extention `@0.5x.png` to the 50% scale-down spritesheet so PixiJS will visually-double them automatically
-- Draw order can be important
+- 尽可能使用精灵表（Spritesheets）以最小化总纹理数
+- 精灵可以与多达 16 种不同的纹理一起批处理（取决于硬件）
+- 这是渲染内容的最快方法
+- 在较旧的设备上使用较小的低分辨率纹理
+- 将 50％ 缩放的精灵表添加扩展名 `@0.5x.png`，这样 PixiJS 将自动将其视觉上放大两倍
+- 绘制顺序可能很重要
 
-### Graphics
+### 图形（Graphics）
 
-- Graphics fastest when they are not modified constantly (not including the transform, alpha or tint!)
-- Graphics objects are batched when under a certain size (100 points or smaller)
-- Small Graphics objects are as fast as Sprites (rectangles, triangles)
-- Using 100s of graphics complex objects can be slow, in this instance use sprites (you can create a texture)
+- 图形在不经常修改时速度最快（不包括变换、透明度或着色！）
+- 图形对象在某个大小范围内（100 个点或更小）时进行批处理
+- 小的图形对象与精灵一样快速（矩形、三角形）
+- 使用数百个复杂的图形对象可能会很慢，在这种情况下使用精灵（您可以创建一个纹理）
 
-### Texture
+### 纹理（Texture）
 
-- Textures are automatically managed by a Texture Garbage Collector
-- You can also manage them yourself by using `texture.destroy()`
-- If you plan to destroyed more than one at once add a random delay to their destruction to remove freezing
-- Delay texture destroy if you plan to delete a lot of textures yourself
+- 纹理由纹理垃圾收集器自动管理
+- 您还可以通过使用 `texture.destroy()` 自行管理纹理
+- 如果您计划一次销毁多个纹理，请在销毁它们之前添加随机延迟，以避免冻结
+- 如果您计划自己删除大量纹理，则延迟纹理销毁
 
-### Text
+### 文本（Text）
 
-- Avoid changing it on every frame as this can be expensive (each time it draws to a canvas and then uploads to GPU)
-- Bitmap Text gives much better performance for dynamically changing text
-- Text resolution matches the renderer resolution, to decreases resolution yourself by setting `resolution` property, which can consume less memory
+- 避免在每帧上都进行更改，因为这可能会很昂贵（每次它绘制到画布然后上传到 GPU）
+- 对于动态更改的文本，位图文本（Bitmap Text）的性能要好得多
+- 文本分辨率与渲染器分辨率相匹配，通过设置 `resolution` 属性来自行减少分辨率，可以减少内存消耗
 
-### Masks
+### 蒙版（Masks）
 
-- Masks can be expensive if too many are used: e.g., 100s of masks will really slow things down
-- Axis-aligned Rectangle masks are the fastest (as the use scissor rect)
-- Graphics masks are second fastest (as they use the stencil buffer)
-- Sprite masks are the third fastest (they uses filters). They are really expensive. Do not use too many in your scene!
+- 如果使用太多蒙版，可能会很昂贵：例如，使用了数百个蒙版会使事情变得非常慢
+- 轴对齐的矩形蒙版是最快的（因为它们使用裁剪矩形）
+- 图形蒙版是第二快的（因为它们使用模板缓冲区）
+- 精灵蒙版是第三快的（它们使用滤镜）。它们的性能非常昂贵。在您的场景中不要使用太多！
 
-### Filters
+### 滤镜（Filters）
 
-- Release memory: `displayObject.filters = null`
-- If you know the size of them: `displayObject.filterArea = new PIXI.Rectangle(x,y,w,h)`. This can speeds things up as it means the object does not need to be measured
-- Filters are expensive, using too many will start to slow things down!
+- 释放内存：`displayObject.filters = null`
+- 如果您知道它们的大小：`displayObject.filterArea = new PIXI.Rectangle(x,y,w,h)`。这可以加快速度，因为这意味着不需要测量对象
+- 滤镜的性能开销很大，使用太多会开始变慢！
 
-### BlendModes
+### 混合模式（BlendModes）
 
-- Different blend modes will cause batches to break (de-optimize)
-- SceenSprite / NormalSprite / SceenSprite / NormalSprite would be 4 draw calls
-- SceenSprite / SceenSprite / NormalSprite / NormalSprite would be 2 draw calls
+- 不同的混合模式会导致批次中断（变得非优化）
+- SceenSprite / NormalSprite / SceenSprite / NormalSprite 将有 4 个绘制调用
+- SceenSprite / SceenSprite / NormalSprite / NormalSprite 将有 2 个绘制调用
 
 ### CacheAsBitmap
 
-- Setting to `true` turns an object into a Sprite by caching it as a Texture
-- It has a one time cost when it is activated as it draws the object to a Texture
-- Avoid changing this on elements frequently
-- If you have a complicated item that has lots of sprites / filters AND does not move then this will speed up rendering!
-- Do not need apply to sprites as they are already Textures
-- Do not use if the object where its children are constantly changing as this will slow things down
+- 将其设置为 `true` 会将对象作为纹理缓存为精灵
+- 当激活时，它会有一次性成本，因为它将对象绘制到纹理中
+- 避免频繁更改此元素上的设置
+- 如果您有一个复杂的项目，其中有许多精灵/滤镜并且不移动，那么这将加速渲染！
+- 不需要应用于精灵，因为它们已经是纹理
+- 如果其子项经常变化，不要使用，因为这会使性能变慢
 
-### Events
+### 事件
 
-- If an object has no interactive children use `interactiveChildren = false`. The event system will then be able to avoid crawling through the object
-- Setting `hitArea = new PIXI.Rectangle(x,y,w,h)` as above should stop the event system from crawling through the object
+- 如果对象没有交互性子项，请使用 `interactiveChildren = false`。事件系统将能够避免遍历对象
+- 将 `hitArea = new PIXI.Rectangle(x,y,w,h)` 设置为上述内容应该可以阻止事件系统遍历对象
