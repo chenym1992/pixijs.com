@@ -1,75 +1,77 @@
-# Textures
+# 纹理（Textures）
 
-We're slowly working our way down from the high level to the low.  We've talked about the scene graph, and in general about display objects that live in it.  We're about to get to sprites and other simple display objects.  But before we do, we need to talk about textures.
+我们正在逐渐从高层向低层递进。我们已经讨论了场景图，以及通常关于存在其中的显示对象的内容。我们即将开始讨论精灵和其他简单的显示对象。但在这之前，我们需要谈论一下纹理。
 
-In PixiJS, textures are one of the core resources used by display objects.  A texture, broadly speaking, represents a source of pixels to be used to fill in an area on the screen.  The simplest example is a sprite - a rectangle that is completely filled with a single texture.  But things can get much more complex.
+在 PixiJS 中，纹理是显示对象使用的核心资源之一。从宏观上讲，纹理代表了用于填充屏幕上区域的像素源。最简单的示例是精灵 - 一个完全由单个纹理填充的矩形。但情况可以变得更加复杂。
 
-## Life-cycle of a Texture
+## 纹理的生命周期
 
-Let's examine how textures really work, by following the path your image data travels on its way to the screen.
+让我们通过追踪图像数据在传送到屏幕的过程中所经过的路径，来了解纹理是如何真正工作的。
 
-Here's the flow we're going to follow:  Source Image > Loader > BaseTexture > Texture
+以下是我们将要遵循的流程：源图像 > 加载器 > BaseTexture > 纹理（Texture）
 
-### Serving the Image
+### 提供图像
 
-To start with, you have the image you want to display.  The first step is to make it available on your server.  This may seem obvious, but if you're coming to PixiJS from other game development systems, it's worth remembering that everything has to be loaded over the network.  If you're developing locally, please be aware that you *must* use a webserver to test, or your images won't load due to how browsers treat local file security.
+首先，您有要显示的图像。第一步是将其在您的服务器上提供。这可能似乎很明显，但如果您从其他游戏开发系统转到 PixiJS，值得记住的是，由于所有内容都必须通过网络加载，因此要牢记这一点。如果您是在本地开发，请注意您**必须**使用 Web 服务器进行测试，否则由于浏览器处理本地文件安全性的方式，您的图像将无法加载。
 
-### Loading the Image
+### 加载图像
 
-To work with the image, the first step is to pull the image file from your webserver into the user's web browser.  To do this, we can use `PIXI.Texture.from()`, which works for quick demos, but in production you'll use the Loader class.  A Loader  wraps and manages using an `<IMG>` element to tell the browser to fetch the image, and then notifies you when that has been completed.  This process is *asynchronous* - you request the load, then time passes, then an event fires to let you know the load is completed.  We'll go into the loader in a lot more depth in a later guide.
+要使用图像，首先的步骤是将图像文件从 Web 服务器拉到用户的 Web 浏览器中。为此，我们可以使用 `PIXI.Texture.from()`，这在快速演示中有效，但在生产中，您将使用 Loader 类。加载器将使用 `<IMG>` 元素包装和管理告诉浏览器获取图像的过程，并在完成后通知您。这个过程是*异步*的 - 您请求加载，然后时间流逝，然后触发事件通知您加载完成。我们将在后面的指南中更深入地介绍加载器。
 
-### BaseTextures Own the Data
+### BaseTextures 拥有数据
 
-Once the Loader has done its work, the loaded `<IMG>` element contains the pixel data we need.  But to use it to render something, PixiJS has to take that raw image file and upload it to the GPU.  This brings us to the real workhorse of the texture system - the [BaseTexture](https://pixijs.download/release/docs/PIXI.BaseTexture.html) class.  Each BaseTexture manages a single pixel source - usually an image, but can also be a Canvas or Video element.  BaseTextures allow PixiJS to convert the image to pixels and use those pixels in rendering.  In addition, it also contains settings that control how the texture data is rendered, such as the wrap mode (for UV coordinates outside the 0.0-1.0 range) and scale mode (used when scaling a texture).
+加载器完成其工作后，加载的 `<IMG>` 元素包含了所需的像素数据。但是为了使用它来渲染某些内容，PixiJS 必须将原始图像文件上传到 GPU。这使我们来到了纹理系统的真正工作马 - [BaseTexture](https://pixijs.download/release/docs/PIXI.BaseTexture.html) 类。每个 BaseTexture 管理一个单独的像素源 - 通常是图像，但也可以是画布（Canvas）或视频元素。BaseTextures 允许 PixiJS 将图像转换为像素并在渲染中使用这些像素。此外，它还包含控制如何渲染纹理数据的设置，例如包围模式（用于超出 0.0-1.0 范围的 UV 坐标）和缩放模式（用于缩放纹理时）。
 
-BaseTextures are automatically cached, so that calling `PIXI.Texture.from()` repeatedly for the same URL returns the same BaseTexture each time.  Destroying a BaseTexture frees the image data associated with it.
+BaseTextures 会自动缓存，这样对于相同的 URL 反复调用 `PIXI.Texture.from()` 将每次返回相同的 BaseTexture。销毁 BaseTexture 将释放与其关联的图像数据。
 
-### Textures are a View on BaseTextures
+### 纹理是对 BaseTextures 的视图
 
-So finally, we get to the PIXI.Texture class itself!  At this point, you may be wondering what the Texture object *does*.  After all, the BaseTexture manages the pixels and render settings.  And the answer is, it doesn't do very much.  Textures are light-weight views on an underlying BaseTexture.  Their main attribute is the source rectangle within the BaseTexture from which to pull.
+因此，最后，我们终于到达了 PIXI.Texture 类本身！此时，您可能想知道 Texture 对象*有什么用*。毕竟，BaseTexture 管理像素和渲染设置。答案是，它没有做太多事情。纹理是对基础 BaseTexture 的轻量级视图。它们的主要属性是从 BaseTexture 中提取的源矩形。
 
-If all PixiJS drew were sprites, that would be pretty redundant.  But consider [SpriteSheets](./sprite-sheets).  A SpriteSheet is a single image that contains multiple sprite images arranged within.  In a [Spritesheet](https://pixijs.download/release/docs/PIXI.Spritesheet.html) object, a single BaseTexture is referenced by a set of Textures, one for each source image in the original sprite sheet.  By sharing a single BaseTexture, the browser only downloads one file, and our batching renderer can blaze through drawing sprites since they all share the same underlying pixel data.  The SpriteSheet's Textures pull out just the rectangle of pixels needed by each sprite.
+如果 PixiJS 只绘制精灵，那将是相当冗余的。但考虑一下 [精灵表](./sprite-sheets)。精灵表是包含在其中排列的多个精灵图像的单个图像。在 [Spritesheet](https://pixijs.download/release/docs/PIXI.Spritesheet.html) 对象中，一组纹理引用了单个 BaseTexture，每个原始精灵表中的源图像对应一个纹理。通过共享单个 BaseTexture，浏览器仅下载一个文件，并且我们的批处理渲染器可以通过绘制精灵来快速绘制，因为它们都共享相同的基础像素数据。精灵表的纹理从每个精灵所需的像素矩形中提取。
 
-<!--TODO: Image showing sprite sheet base texture, plus each sprite's texture-->
+<!--TODO: 显示精灵表基础纹理的图像，以及每个精灵的纹理-->
 
-That is why we have both Textures and BaseTextures - to allow sprite sheets, animations, button states, etc to be loaded as a single image, while only displaying the part of the master image that is needed.
+这就是为什么我们同时拥有纹理和 BaseTexture - 为了允许将精灵表、动画、按钮状态等加载为单个图像，同时只显示所需的主图像部分。
 
-## Loading Textures
+## 加载纹理
 
-We will discuss resource loading in a later guide, but one of the most common issues new users face when building a PixiJS project is how best to load their textures.  Using `PIXI.Texture.from()` as we do in our demo snippets will work, but will result in pop-in as each texture is loaded while your objects are already being rendered in the scene graph.
+我们将在以后的指南中讨论资源加载，但是新用户在构建 PixiJS 项目时最常遇到的一个问题是如何最好地加载纹理。在我们的演示代码片段中使用 `PIXI.Texture.from()` 将起作用，但会导致纹理在对象已经在场景图中渲染时被加载，从而导致弹出。
 
-Instead, here's a quick cheat sheet of one good solution:
+相反，这里是一个快速的解决方案的备忘单：
 
-1. Show a loading image
-2. Create a Loader
-3. Run all texture-based objects, add their textures to the loader
-4. Start the loader, and optionally update your loading image based on progress callbacks
-5. On loader completion, run all objects and use `PIXI.Texture.from()` to pull the loaded textures out of the texture cache
-6. Prepare your textures (optional - see below)
-7. Hide your loading image, start rendering your scene graph
+1. 显示加载图像
+2. 创建一个加载器
+3. 运行所有基于纹理的对象，将它们的纹理添加到加载器
+4. 启动加载器，并根据进度回调可选择更新您的加载图像
+5. 在加载器完成后
 
-Using this workflow ensures that your textures are pre-loaded, to prevent pop-in, and is relatively easy to code.
+，运行所有对象，并使用 `PIXI.Texture.from()` 从纹理缓存中提取已加载的纹理
+6. 准备您的纹理（可选 - 详见下文）
+7. 隐藏您的加载图像，开始渲染您的场景图
 
-Regarding preparing textures: Even after you've loaded your textures, the images still need to be pushed to the GPU and decoded.  Doing this for a large number of source images can be slow and cause lag spikes when your project first loads.  To solve this, you can use the [Prepare](https://pixijs.download/release/docs/PIXI.Prepare.html) plugin, which allows you to pre-load textures in a final step before displaying your project.
+使用此工作流程可确保预加载纹理，以防止弹出，并且相对较容易编码。
 
-## Unloading Textures
+关于准备纹理：即使在加载了纹理后，图像仍然需要被推送到 GPU 并进行解码。对大量原始图像执行此操作可能会很慢，并在项目首次加载时导致延迟峰值。为解决这个问题，您可以使用 [Prepare](https://pixijs.download/release/docs/PIXI.Prepare.html) 插件，在显示项目之前的最后一步中预加载纹理。
 
-Once you're done with a Texture, you may wish to free up the memory (both WebGL-managed buffers and browser-based) that it uses.  To do so, you should call `destroy()` on the BaseTexture that owns the data.  Remember that Textures don't manage pixel data!
+## 卸载纹理
 
-This is a particularly good idea for short-lived imagery like cut-scenes that are large and will only be used once.  If you want to remove *all* textures and wipe the slate clean, you can use the `PIXI.utils.destroyTextureCache()` function.
+完成纹理后，您可能希望释放它使用的内存（包括 WebGL 管理的缓冲区和基于浏览器的内存）。为此，您应该在拥有数据的 BaseTexture 上调用 `destroy()`。请记住，纹理不管理像素数据！
 
-## Beyond Images
+这对于短暂的图像，例如仅使用一次且很大的过场动画来说是一个特别好的想法。如果您想要删除*所有*纹理并彻底清除，可以使用 `PIXI.utils.destroyTextureCache()` 函数。
 
-As we alluded to above, you can make a Texture out of more than just images:
+## 超越图像
 
-Video: Pass an HTML5 `<VIDEO>` element to `PIXI.BaseTexture.from()` to allow you to display video in your project.  Since it's a texture, you can tint it, add filters, or even apply it to custom geometry.
+正如上面所提到的，您可以将纹理制作为不仅仅是图像：
 
-Canvas: Similarly, you can wrap an HTML5 `<CANVAS>` element in a BaseTexture to let you use canvas's drawing methods to dynamically create a texture.
+视频：将 HTML5 `<VIDEO>` 元素传递给 `PIXI.BaseTexture.from()`，以便在项目中显示视频。因为它是一种纹理，所以您可以对其进行着色，添加滤镜，甚至将其应用于自定义几何体。
 
-SVG: Pass in an `<SVG>` element or load a .svg URL, and PixiJS will attempt to rasterize it.  For highly network-constrained projects, this can allow for beautiful graphics with minimal network load times.
+画布（Canvas）：类似地，您可以将 HTML5 `<CANVAS>` 元素包装在 BaseTexture 中，以便您可以使用画布的绘图方法来动态创建纹理。
 
-RenderTexture: A more advanced (but very powerful!) feature is to build a Texture from a [RenderTexture](https://pixijs.download/release/docs/PIXI.RenderTexture.html).  This can allow for building complex geometry using a [Geometry](https://pixijs.download/release/docs/PIXI.Geometry.html) object, then baking that geometry down to a simple texture.
+SVG：传递一个 `<SVG>` 元素或加载 .svg URL，并且 PixiJS 将尝试对其进行光栅化。对于网络受限的项目，这可以在网络负载时间较短的情况下创建出色的图形。
 
-Each of these texture sources has caveats and nuances that we can't cover in this guide, but they should give you a feeling for the power of PixiJS's texture system. <!--TODO: link to advanced textures guide-->
+渲染纹理：更高级（但非常强大！）的功能是通过 [RenderTexture](https://pixijs.download/release/docs/PIXI.RenderTexture.html) 从几何体构建纹理。这可以允许使用 [Geometry](https://pixijs.download/release/docs/PIXI.Geometry.html) 对象构建复杂的几何体，然后将该几何体烘焙成简单的纹理。
 
-Check out the [render texture example code](/examples/textures/render-texture-basic).
+这些纹理来源都有无法在本指南中覆盖的注意事项和细微差别，但它们应该为您展示了 PixiJS 纹理系统的强大之处。<!--TODO: 高级纹理指南链接-->
+
+查看 [渲染纹理示例代码](/examples/textures/render-texture-basic)。

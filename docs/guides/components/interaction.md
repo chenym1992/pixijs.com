@@ -1,67 +1,66 @@
-# Interaction
+# 交互（Interaction）
 
-PixiJS is primarily a rendering system, but it also includes support for interactivity. Adding support for mouse and touch events to your project is simple and consistent.
+PixiJS 主要是一个渲染系统，但它也包括对交互的支持。将鼠标和触摸事件添加到您的项目中非常简单且一致。
 
-## Event Modes
+## 事件模式
 
-The new event-based system that replaced InteractionManager from v6 has expanded the definition of what a DisplayObject means to be interactive. With this we have introduced `eventMode` which allows you to control how an object responds to interaction events. This is similar to the `interactive` property in v6 but with more options.
+新的基于事件的系统替代了 v6 中的 InteractionManager，扩展了 DisplayObject 的交互定义。通过这个系统，我们引入了 `eventMode`，允许您控制对象如何响应交互事件。这类似于 v6 中的 `interactive` 属性，但具有更多选项。
 
-| eventMode | Description |
+| eventMode | 描述 |
 |---|---|
-| `none` | Ignores all interaction events, similar to CSS's `pointer-events: none`, good optimization for non-interactive children |
-|  `passive`  | Does not emit events and ignores hit testing on itself but does allow for events and hit testing only its interactive children. If you want to be compatible with v6, set this as your default `eventMode` (see options in Renderer, Application, etc) |
-|  `auto`  | Does not emit events and but is hit tested if parent is interactive. Same as `interactive = false` in v7 |
-|  `static`  | Emit events and is hit tested. Same as `interaction = true` in v7, useful for objects like buttons that do not move. |
-|  `dynamic` | Emits events and is hit tested but will also receive mock interaction events fired from a ticker to allow for interaction when the mouse isn't moving. This is useful for elements that independently moving or animating. |
+| `none` | 忽略所有交互事件，类似于 CSS 的 `pointer-events: none`，用于非交互式子对象的优化 |
+|  `passive`  | 不会发出事件，对自身不执行命中测试，但允许事件和命中测试仅限于其交互式子对象。如果要与 v6 兼容，请将其设置为默认的 `eventMode`（请参阅 Renderer、Application 等中的选项） |
+|  `auto`  | 不会发出事件，但如果父对象是交互式的，会执行命中测试。与 v7 中的 `interactive = false` 相同 |
+|  `static`  | 发出事件并执行命中测试。与 v7 中的 `interaction = true` 相同，适用于像按钮这样不会移动的对象。 |
+|  `dynamic` | 发出事件并执行命中测试，但还将从计时器接收模拟的交互事件，以允许在鼠标不移动时进行交互。这对于独立移动或动画的元素非常有用。 |
 
-## Event Types
+## 事件类型
 
-PixiJS supports the following event types:
+PixiJS 支持以下事件类型：
 
-| Event Type | Description |
+| 事件类型 | 描述 |
 |---|---|
-| `pointercancel` | Fired when a pointer device button is released outside the display object that initially registered a pointerdown. |
-| `pointerdown` | Fired when a pointer device button is pressed on the display object. |
-| `pointerenter` | Fired when a pointer device enters the display object. |
-| `pointerleave` | Fired when a pointer device leaves the display object. |
-| `pointermove` | Fired when a pointer device is moved while over the display object. |
-| `globalpointermove` | Fired when a pointer device is moved, regardless of hit-testing the current object. |
-| `pointerout` | Fired when a pointer device is moved off the display object. |
-| `pointerover` | Fired when a pointer device is moved onto the display object. |
-| `pointertap` | Fired when a pointer device is tapped twice on the display object. |
-| `pointerup` | Fired when a pointer device button is released over the display object. |
-| `pointerupoutside` | Fired when a pointer device button is released outside the display object that initially registered a pointerdown. |
-| `mousedown ` | Fired when a mouse button is pressed on the display object. |
-| `mouseenter` | Fired when the mouse cursor enters the display object. |
-| `mouseleave` | Fired when the mouse cursor leaves the display object. |
-| `mousemove ` | Fired when the mouse cursor is moved while over the display object. |
-| `globalmousemove` | Fired when a mouse is moved, regardless of hit-testing the current object. |
-| `mouseout ` | Fired when the mouse cursor is moved off the display object. |
-| `mouseover ` | Fired when the mouse cursor is moved onto the display object. |
-| `mouseup ` | Fired when a mouse button is released over the display object. |
-| `mouseupoutside ` | Fired when a mouse button is released outside the display object that initially registered a mousedown. |
-| `click ` | Fired when a mouse button is clicked (pressed and released) over the display object. |
-| `touchcancel ` | Fired when a touch point is removed outside of the display object that initially registered a touchstart. |
-| `touchend ` | Fired when a touch point is removed from the display object. |
-| `touchendoutside ` | Fired when a touch point is removed outside of the display object that initially registered a touchstart. |
-| `touchmove ` | Fired when a touch point is moved along the display object. |
-| `globaltouchmove` | Fired when a touch point is moved, regardless of hit-testing the current object. |
-| `touchstart ` | Fired when a touch point is placed on the display object. |
-| `tap ` | Fired when a touch point is tapped twice on the display object. |
-| `wheel ` | Fired when a mouse wheel is spun over the display object. |
-| `rightclick ` | Fired when a right mouse button is clicked (pressed and released) over the display object. |
-| `rightdown ` | Fired when a right mouse button is pressed on the display object. |
-| `rightup ` | Fired when a right mouse button is released over the display object. |
-| `rightupoutside ` | Fired when a right mouse button is released outside the display object that initially registered a rightdown. |
+| `pointercancel` | 当指针设备按钮在最初注册 pointerdown 的显示对象外释放时触发。 |
+| `pointerdown` | 当指针设备按钮在显示对象上按下时触发。 |
+| `pointerenter` | 当指针设备进入显示对象时触发。 |
+| `pointerleave` | 当指针设备离开显示对象时触发。 |
+| `pointermove` | 当指针设备在显示对象上移动时触发。 |
+| `globalpointermove` | 当指针设备移动时触发，无论当前对象是否进行命中测试。 |
+| `pointerout` | 当指针设备移动到显示对象外时触发。 |
+| `pointerover` | 当指针设备移动到显示对象上时触发。 |
+| `pointertap` | 当指针设备在显示对象上双击时触发。 |
+| `pointerup` | 当指针设备按钮在显示对象上释放时触发。 |
+| `pointerupoutside` | 当指针设备按钮在最初注册 pointerdown 的显示对象外释放时触发。 |
+| `mousedown ` | 当鼠标按钮在显示对象上按下时触发。 |
+| `mouseenter` | 当鼠标光标进入显示对象时触发。 |
+| `mouseleave` | 当鼠标光标离开显示对象时触发。 |
+| `mousemove ` | 当鼠标光标在显示对象上移动时触发。 |
+| `globalmousemove` | 当鼠标移动时触发，无论当前对象是否进行命中测试。 |
+| `mouseout ` | 当鼠标光标移动到显示对象外时触发。 |
+| `mouseover ` | 当鼠标光标移动到显示对象上时触发。 |
+| `mouseup ` | 当鼠标按钮在显示对象上释放时触发。 |
+| `mouseupoutside ` | 当鼠标按钮在最初注册 mousedown 的显示对象外释放时触发。 |
+| `click ` | 当鼠标按钮在显示对象上点击（按下并释放）时触发。 |
+| `touchcancel ` | 当触摸点在最初注册 touchstart 的显示对象外部被移除时触发。 |
+| `touchend ` | 当触摸点从显示对象上移除时触发。 |
+| `touchendoutside ` | 当触摸点在最初注册 touchstart 的显示对象外部被移除时触发。 |
+| `touchmove ` | 当触摸点沿显示对象移动时触发。 |
+| `globaltouchmove` | 当触摸点移动时触发，无论当前对象是否进行命中测试。 |
+| `touchstart ` | 当触摸点放在显示对象上时触发。 |
+| `tap ` | 当触摸点在显示对象上双击时触发。 |
+| `wheel ` | 当鼠标滚轮在显示对象上滚动时触发。 |
+| `rightclick ` | 当右鼠标按钮在显示对象上点击（按下并释放）时触发。 |
+| `rightdown ` | 当右鼠标按钮在显示对象上按下时触发。 |
+| `rightup ` | 当右鼠标按钮在显示对象上释放时触发。 |
+| `rightupoutside ` | 当右鼠标按钮在最初注册 rightdown 的显示对象外释放时触发。 |
 
+## 启用交互
 
-## Enabling Interaction
+任何派生自 DisplayObject 的对象（Sprite、Container 等）都可以通过将其 `eventMode` 属性设置为上述任何 `eventMode` 来变得交互式。这样做将导致对象发出交互事件，您可以响应这些事件以驱动项目的行为。
 
-Any DisplayObject-derived object (Sprite, Container, etc.) can become interactive simply by setting its `eventMode` property to any of the eventModes listed above. Doing so will cause the object to emit interaction events that can be responded to in order to drive your project's behavior.
+请查看[交互示例代码](/examples/events/click)。
 
-Check out the [interaction example code](/examples/events/click).
-
-To respond to clicks and taps, bind to the events fired on the object, like so:
+要响应点击和触摸，可以绑定在对象上触发的事件，如下所示：
 
 ```javascript
 let sprite = PIXI.Sprite.from('/some/texture.png');
@@ -69,11 +68,13 @@ sprite.on('pointerdown', (event) => { alert('clicked!'); });
 sprite.eventMode = 'static';
 ```
 
-Check out the [DisplayObject](https://pixijs.download/release/docs/PIXI.DisplayObject.html) for the list of interaction events supported.
+请
 
-### Checking if Object is Interactive
+查看[DisplayObject](https://pixijs.download/release/docs/PIXI.DisplayObject.html)以获取支持的交互事件列表。
 
-You can check if an object is interactive by calling the `isInteractive` property. This will return true if `eventMode` is set to `static` or `dynamic`.
+### 检查对象是否可交互
+
+您可以通过调用 `isInteractive` 属性来检查对象是否可交互。如果 `eventMode` 设置为 `static` 或 `dynamic`，则将返回 true。
 
 ```javascript
 if (sprite.isInteractive()) {
@@ -81,27 +82,26 @@ if (sprite.isInteractive()) {
 }
 ```
 
-## Use Pointer Events
+## 使用指针事件
 
-PixiJS supports three types of interaction events - mouse, touch and pointer. Mouse events are fired by mouse movement, clicks etc. Touch events are fired for touch-capable devices. And pointer events are fired for _both_.
+PixiJS 支持三种类型的交互事件 - 鼠标、触摸和指针。鼠标事件由鼠标移动、点击等触发。触摸事件用于支持触摸设备。而指针事件同时适用于鼠标和触摸设备。
 
-What this means is that, in many cases, you can write your project to use pointer events and it will just work when used with _either_ mouse or touch input. Given that, the only reason to use non-pointer events is to support different modes of operation based on input type or to support multi-touch interaction. In all other cases, prefer pointer events.
+这意味着，在许多情况下，您可以编写支持指针事件的项目，然后无论是鼠标还是触摸输入，都可以正常工作。在其他情况下，仅在需要根据输入类型支持不同操作模式或支持多点触摸交互时才使用非指针事件。在其他情况下，请优先使用指针事件。
 
-## Optimization
+## 优化
 
-Hit testing requires walking the full object tree, which in complex projects can become an optimization bottleneck. To mitigate this issue, PixiJS Container-derived objects have a property named `interactiveChildren`. If you have Containers or other objects with complex child trees that you know will never be interactive, you can set this property to `false` and the hit testing algorithm will skip those children when checking for hover and click events. As an example, if you were building a side-scrolling game, you would probably want to set `background.interactiveChildren = false` for your background layer with rocks, clouds, flowers, etc. Doing so would speed up hit testing substantially due to the number of unclickable child objects the background layer would contain.
+命中测试需要遍历整个对象树，在复杂项目中可能会成为优化瓶颈。为了缓解这个问题，PixiJS 的容器派生对象具有一个名为 `interactiveChildren` 的属性。如果您拥有容器或其他具有复杂子树的对象，并且知道这些子对象永远不会是交互式的，您可以将此属性设置为 `false`，在检查悬停和点击事件时，命中测试算法将跳过这些子对象。例如，如果您正在构建一个侧滑游戏，您可能会为包含岩石、云、花等内容的背景层设置 `background.interactiveChildren = false`。这将由于背景层将包含大量不可点击的子对象而大大加速命中测试。`EventSystem` 也可以自定义为更高性能：
 
-The `EventSystem` can also be customised to be more performant:
 ```js
 const app = new PIXI.Application({
     /**
-     * by default we use `auto` for backwards compatibility.
-     * However `passive` is more performant and will be used by default in the future,
+     * 默认情况下我们使用 `auto` 以保持向后兼容性。
+     * 但是 `passive` 更高效，并且将在未来成为默认选项，
      */
     eventMode: 'passive',
     eventFeatures: {
         move: true,
-        /** disables the global move events which can be very expensive in large scenes */
+        /** 禁用全局移动事件，大型场景中可能非常昂贵 */
         globalMove: false,
         click: true,
         wheel: true,

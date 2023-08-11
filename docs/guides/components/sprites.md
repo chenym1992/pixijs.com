@@ -1,41 +1,43 @@
-# Sprites
+# 精灵（Sprites）
 
-Sprites are the simplest and most common renderable object in PixiJS.  They represent a single image to be displayed on the screen.  Each [Sprite](https://pixijs.download/release/docs/PIXI.Sprite.html) contains a [Texture](https://pixijs.download/release/docs/PIXI.Texture.html) to be drawn, along with all the transformation and display state required to function in the scene graph.
+精灵是 PixiJS 中最简单且最常见的可渲染对象。它们表示在屏幕上显示的单个图像。每个 [Sprite](https://pixijs.download/release/docs/PIXI.Sprite.html) 包含要绘制的 [Texture](https://pixijs.download/release/docs/PIXI.Texture.html)，以及在场景图中正常运作所需的所有变换和显示状态。
 
-## Creating Sprites
+## 创建精灵
 
-To create a Sprite, all you need is a Texture (check out the Texture guide).  Load a PNG's URL using the PIXI.Loader class, then call `PIXI.Sprite.from(url)` and you're all set.  As a convenience during prototyping, you can pass a non-loaded URL to `from()` and PixiJS will handle it, but your sprite will "pop in" after it loads if you don't pre-load your textures.
+要创建一个精灵，您只需要一个纹理（请查看纹理指南）。使用 PIXI.Loader 类加载 PNG 的 URL，然后调用 `PIXI.Sprite.from(url)`，然后您就完成了。在原型制作时的一个便利之处是，您可以将一个未加载的 URL 传递给 `from()`，PixiJS 将处理它，但是如果您不预加载纹理，则在加载后会看到精灵“弹入”。
 
-Check out the [sprite example code](/examples/sprite/basic).
+请查看[精灵示例代码](/examples/sprite/basic)。
 
-## Using Sprites
+## 使用精灵
 
-In our [DisplayObject guide](display-object), we learned about the DisplayObject class and the various properties it defines.  Since Sprite objects are also display objects, you can move a sprite, rotate it, and update any other display property.
+在我们的[显示对象指南](display-object)中，我们了解了 DisplayObject 类以及它定义的各种属性。由于精灵对象也是显示对象，您可以移动精灵、旋转它，并更新任何其他显示属性。
 
-## Alpha, Tint and Blend Modes
+## 透明度、色调和混合模式
 
-Alpha is a standard display object property.  You can use it to fade sprites into the scene by animating each sprite's alpha from 0.0 to 1.0 over a period of time.
+透明度是一个标准的显示对象属性。您可以使用它将精灵从 0.0 渐变为 1.0 的透明度通过一段时间来实现淡入场景中。
 
-Tinting allows you multiply the color value of every pixel by a single color.  For example, if you had a dungeon game, you might show a character's poison status by setting `obj.tint = 0x00FF00`, which would give a green tint to the character.
+色调允许您将每个像素的颜色值与单个颜色相乘。例如，如果您有一个地牢游戏，您可能会通过设置 `obj.tint = 0x00FF00` 来显示角色的中毒状态，从而给角色一个绿色的色调。
 
-Blend modes change how pixel colors are added to the screen when rendering.  The three main modes are __add__, which adds each pixel's RGB channels to whatever is under your sprite (useful for glows and lighting), __multiply__ which works like `tint`, but on a per-pixel basis, and __screen__, which overlays the pixels, brightening whatever is underneath them.
+混合模式在渲染时更改像素颜色添加到屏幕的方式。主要的三种模式是 __add__，它将每个像素的 RGB 通道添加到您的精灵下方的内容中（对于发光和照明非常有用），__multiply__ 的工作方式类似于 `tint`，但是在每个像素上进行，以及 __screen__，它叠加像素，照亮下方的任何内容。
 
-## Scale vs Width & Height
+## 缩放 vs 宽度和高度
 
-One common area of confusion when working with sprites lies in scaling and dimensions.  The PIXI.DisplayObject class allows you to set the x and y scale for any object.  Sprites, being DisplayObjects, also support scaling.  In addition, however, Sprites support explicit `width` and `height` attributes that can be used to achieve the same effect, but are in pixels instead of a percentage.  This works because a Sprite object owns a Texture, which has an explicit width and height.  When you set a Sprite's width, internally PixiJS converts that width into a percentage of the underlying texture's width and updates the object's x-scale.  So width and height are really just convenience methods for changing scale, based on pixel dimensions rather than percentages.
+在使用精灵时，一个常见的困惑点在于缩放和尺寸。PIXI.DisplayObject 类允许您为任何对象设置 x 和 y 缩放。作为显示对象，精灵也支持缩放。然而，除此之外，精灵还支持显式的 `width` 和 `height` 属性，可用于实现相同的效果，但以像素而不是百分比为单位。这是因为 Sprite 对象拥有一个 Texture，该 Texture 具有明确的宽度和高度。当您设置精灵的宽度时，内部 PixiJS 会将该宽度转换为基础纹理宽度的百分比，并更新对象的 x 缩放。因此，宽度和高度实际上只是基于像素尺寸而不是百分比的方便方法来更改缩放。
 
-## Pivot vs Anchor
+## 旋转中心（Pivot） vs 锚点（Anchor）
 
-If you add a sprite to your stage and rotate it, it will by default rotate around the top-left corner of the image.  In some cases, this is what you want.  In many cases, however, what you want is for the sprite to rotate around the center of the image it contains, or around an arbitrary point.
+如果将精灵添加到舞台并对其进行旋转，默认情况下，它将围绕图像的左上角旋转。在某些情况下，这是您想要的。然而，在许多情况下，您可能希望精灵围绕它包含的图像的中心旋转，或围绕一个任意点旋转。
 
-There are two ways to achieve this: *pivots* and *anchors*
+有两种方法可以实现这一点：*旋转中心*和*锚点*
 
-An object's __pivot__ is an offset, expressed in pixels, from the top-left corner of the Sprite.  It defaults to (0, 0).  If you have a Sprite whose texture is 100px x 50px, and want to set the pivot point to the center of the image, you'd set your pivot to (50, 25) - half the width, and half the height.  Note that pivots can be set *outside* of the image, meaning the pivot may be less than zero or greater than the width/height.  This can be useful in setting up complex animation hierarchies, for example.  Every DisplayObject has a pivot.
+一个对象的 __旋转中心__ 是距离 Sprite 的左上角的偏移量，以像素为单位。它默认为 (0, 0)。如果您有一个 Texture 大小为 100 像素 x 50 像素的 Sprite，并且希望将旋转中心设置为图像的中心，您可以将旋转中心设置为 (50, 25) - 宽度
 
-An __anchor__, in contrast, is only available for Sprites.  Anchors are specified in percentages, from 0.0 to 1.0, in each dimension.  To rotate around the center point of a texture using anchors, you'd set your Sprite's anchor to (0.5, 0.5) - 50% in width and height.  While less common, anchors can also be outside the standard 0.0 - 1.0 range.
+和高度的一半。请注意，旋转中心可以设置在图像之外，这意味着旋转中心可以小于零或大于宽度/高度。这在设置复杂的动画层次结构时可能很有用。每个 DisplayObject 都有一个旋转中心。
 
-The nice thing about anchors is that they are resolution and dimension agnostic.  If you set your Sprite to be anchored in the middle then later change the size of the texture, your object will still rotate correctly.  If you had instead set a pivot using pixel-based calculations, changing the texture size would require changing your pivot point.
+相反，__锚点__ 仅适用于精灵。锚点在每个维度上以百分比为单位指定，从 0.0 到 1.0。要使用锚点在锚点上旋转纹理的中心点，您可以将 Sprite 的锚点设置为 (0.5, 0.5) - 宽度和高度的 50%。虽然不常见，锚点也可以超出标准的 0.0 - 1.0 范围。
 
-So, generally speaking, you'll want to use anchors when working with Sprites.
+锚点的好处在于它们不受分辨率和尺寸的影响。如果您将精灵锚定在中间，然后稍后更改纹理的大小，您的对象仍然会正确旋转。如果您在计算像素为基础的计算时设置了一个旋转中心，那么更改纹理大小将需要更改旋转中心。
 
-One final note: unlike CSS, where setting the transform-origin of the image doesn't move it, in PixiJS setting an anchor or pivot *will* move your object on the screen.  In other words, setting an anchor or pivot affects not just the rotation origin, but also the position of the sprite relative to its parent.
+因此，一般来说，在使用精灵时，您会希望使用锚点。
+
+最后需要注意的是，与 CSS 不同，设置图像的 transform-origin 不会移动图像，而在 PixiJS 中，设置锚点或旋转中心将移动图像在屏幕上的位置。换句话说，设置锚点或旋转中心不仅会影响旋转原点，还会影响精灵相对于其父级的位置。

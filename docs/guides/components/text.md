@@ -1,44 +1,44 @@
-# Text
+# 文本（Text）
 
-Whether it's a high score or a diagram label, text is often the best way to convey information in your projects.  Surprisingly, drawing text to the screen with WebGL is a very complex process - there's no built in support for it at all.  One of the values PixiJS provides is in hiding this complexity to allow you to draw text in diverse styles, fonts and colors with a few lines of code.  In addition, these bits of text are just as much scene objects as sprites - you can tint text, rotate it, alpha-blend it, and otherwise treat it like any other graphical object.
+无论是高分数还是图表标签，文本通常是在项目中传达信息的最佳方式。令人惊讶的是，使用 WebGL 在屏幕上绘制文本是一个非常复杂的过程 - 它根本没有内置的支持。 PixiJS 提供的一个价值在于隐藏了这种复杂性，允许您以几行代码绘制各种样式、字体和颜色的文本。此外，这些文本片段与精灵一样都是场景对象 - 您可以对文本进行染色、旋转、透明混合等操作，就像处理其他任何图形对象一样。
 
-Let's dig into how this works.
+让我们深入了解这是如何工作的。
 
-## There Are Two Kinds of Text
+## 有两种类型的文本
 
-Because of the challenges of working with text in WebGL, PixiJS provides two very different solutions.  In this guide, we're going to go over both methods in some detail to help you make the right choice for your project's needs.  Selecting the wrong text type can have a large negative impact on your project's performance and appearance.
+由于在 WebGL 中处理文本的挑战，PixiJS 提供了两种非常不同的解决方案。在本指南中，我们将详细介绍这两种方法，以帮助您为项目的需求选择正确的文本类型。选择错误的文本类型可能会对项目的性能和外观产生重大影响。
 
-## The Text Object
+## 文本对象
 
-In order to draw text to the screen, you use a [Text](https://pixijs.download/release/docs/PIXI.Text.html) object.  Under the hood, this class draws text to an off-screen buffer using the browser's normal text rendering, then uses that offscreen buffer as the source for drawing the text object.  Effectively what this means is that whenever you create or change text, PixiJS creates a new rasterized image of that text, and then treats it like a sprite.  This approach allows truly rich text display while keeping rendering speed high.
+为了在屏幕上绘制文本，您将使用 [Text](https://pixijs.download/release/docs/PIXI.Text.html) 对象。在内部，此类使用浏览器的正常文本渲染将文本绘制到屏幕外缓冲区，然后将该屏幕外缓冲区用作绘制文本对象的源。实际上，这意味着每当您创建或更改文本时，PixiJS 都会创建文本的新光栅化图像，然后将其视为精灵。通过此方法，可以在保持渲染速度快的同时实现真正的富文本显示。
 
-So when working with PIXI.Text objects, there are two sets of options - standard display object options like position, rotation, etc that work *after* the text is rasterized internally, and text style options that are used *while* rasterizing.  Because text once rendered is basically just a sprite, there's no need to review the standard options.  Instead, let's focus on how text is styled.
+因此，在使用 PIXI.Text 对象时，有两组选项 - 标准的显示对象选项（如位置、旋转等），这些选项在内部光栅化文本后起作用，以及在光栅化期间使用的文本样式选项。由于一旦呈现的文本基本上只是一个精灵，因此无需查看标准选项。相反，让我们专注于文本的样式。
 
-Check out the [text example code](/examples/text/pixi-text).
+查看 [文本示例代码](/examples/text/pixi-text)。
 
-## Text Styles
+## 文本样式
 
-There are a lot of text style options available (see [TextStyle](https://pixijs.download/release/docs/PIXI.TextStyle.html)), but they break down into 5 main groups:
+有很多可用的文本样式选项（请参阅 [TextStyle](https://pixijs.download/release/docs/PIXI.TextStyle.html)），但它们可以分为五个主要组：
 
-**Font**: `fontFamily` to select the webfont to use, `fontSize` to specify the size of the text to draw, along with options for font weight, style and variant.
+**字体**：使用 `fontFamily` 选择要使用的网络字体，使用 `fontSize` 指定要绘制的文本大小，还可以选择字体的加粗、样式和变体选项。
 
-**Appearance**: Set the color with `fill` or add a `stroke` outline, including options for gradient fills.
+**外观**：使用 `fill` 设置颜色或添加 `stroke` 轮廓，包括渐变填充选项。
 
-**Drop-Shadows**: Set a drop-shadow with `dropShadow`, with a host of related options to specify offset, blur, opacity, etc.
+**阴影**：使用 `dropShadow` 设置阴影，还有一系列相关选项可指定偏移、模糊、不透明度等。
 
-**Layout**: Enable with `wordWrap` and `wordWrapWidth`, and then customize the `lineHeight` and `align` or `letterSpacing`
+**布局**：通过 `wordWrap` 和 `wordWrapWidth` 启用，然后自定义 `lineHeight` 和 `align` 或 `letterSpacing`。
 
-**Utilities**: Add `padding` or `trim` extra space to deal with funky font families if needed.
+**实用工具**：根据需要添加 `padding` 或 `trim` 额外空间以处理奇怪的字体系列。
 
-To interactively test out feature of Text Style, [check out this tool](https://pixijs.io/pixi-text-style/).
+要交互地测试文本样式的功能，[请查看此工具](https://pixijs.io/pixi-text-style/)。
 
-## Loading and Using Fonts
+## 加载和使用字体
 
-In order for PixiJS to build a PIXI.Text object, you'll need to make sure that the font you want to use is loaded by the browser.  Unfortunately, at the time of writing, the PIXI.Loader system does not support loading font files, so you'll need to use a 3rd party font loader to ensure that any custom web fonts you want to use are pre-loaded.  It's not enough to add an @font-face declaration in your project's CSS because browsers will happily render text using a fallback font while your custom font loads.
+为了使 PixiJS 构建 PIXI.Text 对象，您需要确保要使用的字体由浏览器加载。不幸的是，在撰写本文时，PIXI.Loader 系统不支持加载字体文件，因此您需要使用第三方字体加载器来确保预加载您想要使用的任何自定义 Web 字体。仅在项目的 CSS 中添加 @font-face 声明是不够的，因为浏览器会在自定义字体加载时愉快地使用回退字体来呈现文本。
 
-Any javascript library that can load a web font will work, you just want something that will delay starting your project until the font has been fully loaded by the browser.
+任何可以加载网络字体的 JavaScript 库都可以使用，您只需要使用某种库，该库将等待浏览器完全加载字体后才启动您的项目。
 
-One such library is [FontFaceObserver](https://fontfaceobserver.com).  Here's a simple example that shows how to use it to ensure the web font "Short Stack" is loaded before your app starts.  First, we need a font-face declaration in CSS:
+其中一个这样的库是 [FontFaceObserver](https://fontfaceobserver.com)。以下是一个简单示例，演示如何在启动应用程序之前使用它确保加载了网络字体“Short Stack”。首先，我们需要在 CSS 中进行字体声明：
 
 ```css
 @font-face {
@@ -48,59 +48,61 @@ One such library is [FontFaceObserver](https://fontfaceobserver.com).  Here's a 
 }
 ```
 
-Now that the browser knows what our font is and how to find the source files, it's time to use the library to load them:
+现在，浏览器知道了我们的字体是什么以及如何找到源文件，是时候使用库来加载它们了：
 
 ```javascript
-// Create the loader
+// 创建加载器
 let font = new FontFaceObserver('Short Stack', {});
-// Start loading the font
+// 开始加载字体
 font.load().then(() => {
-  // Successful load, start up your PixiJS app as usual
-  let app = new PIXI.Application({ width: 640, height: 360 });
+  // 成功加载，像往常一样启动您的 PixiJS 应用程序
+  let
+
+ app = new PIXI.Application({ width: 640, height: 360 });
   document.body.appendChild(app.view);
-  // ... etc ...
+  // ... 其他代码 ...
 
 }, () => {
-  // Failed load, log the error or display a message to the user
-  alert('Unable to load required font!');
+  // 加载失败，记录错误或向用户显示消息
+  alert('无法加载所需的字体！');
 });
 ```
 
-## Caveats and Gotchas
+## 注意事项和陷阱
 
-While PixiJS does make working with text easy, there are a few things you need to watch out for.
+虽然 PixiJS 确实使得处理文本变得轻松，但您需要注意一些问题。
 
-First, changing an existing text string requires re-generating the internal render of that text, which is a slow operation that can impact performance if you change many text objects each frame.  If your project requires lots of frequently changing text on the screen at once, consider using a PIXI.BitmapText object (explained below) which uses a fixed bitmap font that doesn't require re-generation when text changes.
+首先，更改现有的文本字符串需要重新生成文本的内部渲染，这是一个缓慢的操作，如果您每帧更改许多文本对象，可能会影响性能。如果您的项目需要在屏幕上同时显示大量经常更改的文本，请考虑使用 PIXI.BitmapText 对象（下面将解释），它使用固定的位图字体，不需要在更改文本时重新生成。
 
-Second, be careful when scaling text.  Setting a text object's scale to > 1.0 will result in blurry/pixely display, because the text is not re-rendered at the higher resolution needed to look sharp - it's still the same resolution it was when generated.  To deal with this, you can render at a higher initial size and down-scale, instead.  This will use more memory, but will allow your text to always look clear and crisp.
+其次，缩放文本时要小心。将文本对象的缩放设置为 > 1.0 将导致模糊或像素化显示，因为文本没有以更高的分辨率重新呈现以保持清晰 - 它仍然是生成时的相同分辨率。要解决这个问题，您可以以更高的初始大小渲染并缩小。这将使用更多的内存，但将始终使您的文本保持清晰和锐利。
 
 ## BitmapText
 
-In addition to the standard PIXI.Text approach to adding text to your project, PixiJS also supports *bitmap fonts*.  Bitmap fonts are very different from TrueType or other general purpose fonts, in that they consist of a single image containing pre-rendered versions of every letter you want to use.  When drawing text with a bitmap font, PixiJS doesn't need to render the font glyphs into a temporary buffer - it can simply copy and stamp out each character of a string from the master font image.
+除了向项目添加文本的标准 PIXI.Text 方法外，PixiJS 还支持*位图字体*。位图字体与 TrueType 或其他通用字体非常不同，因为它们由包含您要使用的每个字母的预渲染版本的单个图像组成。在使用位图字体绘制文本时，PixiJS 不需要将字体字形渲染到临时缓冲区中 - 它只需从主字体图像中复制和戳出每个字符的字符串。
 
-The primary advantage of this approach is speed - changing text frequently is much cheaper and rendering each additional piece of text is much faster due to the shared source texture.
+这种方法的主要优点是速度 - 由于共享源纹理，经常更改文本的成本要低得多，渲染每个附加文本的速度要快得多。
 
-Check out the [bitmap text example code](/examples/text/bitmap-text).
+查看 [位图文本示例代码](/examples/text/bitmap-text)。
 
 ## BitmapFont
 
-- 3rd party solutions
-- BitmapFont.from auto-generation
+- 第三方解决方案
+- BitmapFont.from 自动生成
 
-## Selecting the Right Approach
+## 选择正确的方法
 
 PIXI.Text
-- Static text
-- Small number of text objects
-- High fidelity text rendering (kerning e.g.)
-- Text layout (line & letter spacing)
+- 静态文本
+- 少量文本对象
+- 高保真度的文本渲染（如字距等）
+- 文本布局（行和字母间距）
 
 PIXI.BitmapText
-- Dynamic text
-- Large number of text objects
-- Lower memory
+- 动态文本
+- 大量文本对象
+- 较低内存
 
-<!--## Other options
+<!--## 其他选项
 
-WebGL-only glyph rendering (SDF text)
-DOM-based overlays ()-->
+基于 WebGL 的字形渲染（SDF 文本）
+基于 DOM 的覆盖层（）-->
