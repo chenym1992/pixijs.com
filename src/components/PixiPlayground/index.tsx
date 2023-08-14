@@ -1,14 +1,16 @@
-import { useColorMode } from '@docusaurus/theme-common';
-import { useCallback, useState } from 'react';
 import classNames from 'classnames';
+import { useCallback, useState } from 'react';
+
 import { SandpackLayout, SandpackPreview, SandpackProvider, useActiveCode, useSandpack } from '@codesandbox/sandpack-react';
+import { useColorMode } from '@docusaurus/theme-common';
 import { useContainerClassNameModifier } from '@site/src/hooks/useContainerClassNameModifier';
-import { latestVersion } from './usePixiVersions';
-import MonacoEditor from './MonacoEditor';
-import { useSandpackConfiguration } from './useSandpackConfiguration';
-import type { CodeChangeCallbackType } from './MonacoEditor';
 
 import styles from './index.module.scss';
+import MonacoEditor from './MonacoEditor';
+import { latestVersion } from './usePixiVersions';
+import { useSandpackConfiguration } from './useSandpackConfiguration';
+
+import type { CodeChangeCallbackType } from './MonacoEditor';
 
 type PlaygroundMode = 'tutorial' | 'fullscreen' | 'example';
 

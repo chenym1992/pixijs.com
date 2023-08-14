@@ -1,10 +1,9 @@
-import Layout from '@theme/Layout';
-
 import PixiPlayground from '@site/src/components/PixiPlayground';
-import Select from '@site/src/components/Select';
 import { defaultExampleId, useCodeExamples } from '@site/src/components/PixiPlayground/useEditorCode';
 import { latestVersion, usePixiVersions } from '@site/src/components/PixiPlayground/usePixiVersions';
 import { usePlaygroundURLState } from '@site/src/components/PixiPlayground/usePlaygroundURLState';
+import Select from '@site/src/components/Select';
+import Layout from '@theme/Layout';
 
 import styles from './playground.module.css';
 

@@ -1,6 +1,8 @@
 import { useCallback, useMemo } from 'react';
+
+import { getExampleEntry, getExampleOptions } from '@site/src/data/examples';
+
 import type { ExampleSourceEntry } from '@site/src/data/examples';
-import { getExampleOptions, getExampleEntry } from '@site/src/data/examples';
 import type { OptionGroup } from '@site/src/components/Select';
 import type { SetURLStateType } from '@site/src/components/PixiPlayground/usePlaygroundURLState';
 
@@ -16,7 +18,6 @@ type UseCodeExamplesParams = {
 export const useCodeExamples = ({ urlSourceCode, selectedOptionId, setURLState }: UseCodeExamplesParams) =>
 {
     const hasUrlHashedCode = Boolean(urlSourceCode);
-
     const exampleEntry = useMemo<ExampleSourceEntry | undefined>(
         () => getExampleEntry(selectedOptionId),
         [selectedOptionId],

@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useRef } from 'react';
-import type { editor } from 'monaco-editor';
-import { useColorMode } from '@docusaurus/theme-common';
-import Editor from '@monaco-editor/react';
 
+import { useColorMode } from '@docusaurus/theme-common';
+import Editor, { loader } from '@monaco-editor/react';
+
+import type { editor } from 'monaco-editor';
 const ROOT_DIR = 'inmemory://model/';
 
 export type CodeChangeCallbackType = (code: string | undefined) => void;
@@ -11,6 +12,8 @@ type MonacoEditorProps = {
     code: string;
     onChange: CodeChangeCallbackType;
 };
+
+loader.config({ paths: { vs: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.41.0/min/vs' } });
 
 export default function MonacoEditor({ code, onChange }: MonacoEditorProps)
 {
