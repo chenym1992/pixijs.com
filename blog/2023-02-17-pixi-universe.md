@@ -1,126 +1,132 @@
 ---
-title: Introducing the PixiJS Universe!
-description: PixiJS v2 Website Brief Description
+title: PixiJS 宇宙介绍！
+description: PixiJS v2 网站简要描述
 slug: pixi-universe
 authors:
   - name: Zyie
-    title: PixiJS Maintainer
+    title: PixiJS 维护者
     url: https://github.com/zyie
     image_url: https://github.com/zyie.png
-tags: [PixiJS, PixiJS Universe]
+tags: [PixiJS, PixiJS 宇宙]
 hide_table_of_contents: true
-keywords: ['keyword', 'for', 'search', 'engines']
+keywords: ['keyword', 'for', 'search', 'engines','关键词', '用于', '搜索引擎']
 ---
 
-We are excited to announce the launch of the PixiJS Universe, an initiative to further enhance the capabilities of PixiJS and make it even easier for developers to create amazing games and apps.
+我们很高兴地宣布推出 PixiJS 宇宙计划，这是一个进一步增强 PixiJS 能力并使开发人员更轻松地创建令人惊叹的游戏和应用程序的举措。
 
 <!--truncate-->
 
-For years, PixiJS has been the most popular 2D renderer for the web, but it was always "just a rendering engine." The community has created many great tools to help developers build games and applications with PixiJS, but we lacked the manpower to maintain and improve these tools, causing fragmentation in the community.
-To address this, Playco has assembled a dedicated team of developers who will work on PixiJS full-time. Over the next 12 months, we have more than ten projects planned, and in this announcement, we would like to introduce some of them.
+多年来，PixiJS 一直是 Web 上最受欢迎的 2D 渲染器，但它始终只是一个"渲染引擎"。社区已经创造了许多优秀的工具，以帮助开发人员使用 PixiJS 构建游戏和应用程序，但由于缺乏维护和改进这些工具的人力，导致了社区的分裂。
+为了解决这个问题，Playco 组建了一支专门的开发团队，他们将全职致力于 PixiJS 的开发。在接下来的 12 个月里，我们有超过十个项目计划，并在这个公告中，我们想要介绍其中的一些。
 
-## Phase 1​
-We have several new projects in the works, and we are releasing them in four phases over the year. We are currently nearing the end of phase 1, which has seen the release of several exciting new tools and libraries for PixiJS:
+## 第一阶段
+我们正在进行多个新项目，并在一年内分四个阶段发布它们。我们目前已接近第一阶段的结束，该阶段已发布了几个令人兴奋的新工具和库，用于 PixiJS：
 
-### PixiJS Website​
-First up we are excited to announce that we will be releasing a beta version of our new website for PixiJS.
+### PixiJS 网站
+首先，我们很高兴地宣布我们将发布 PixiJS 新网站的 beta 版本。
 
-The current documentation has suffered from long-term organic growth over the years with little structure and as such much of the PixiJS documentation is fragmented across multiple sites. This new website will put everything you need in one place and be easily searchable.
+当前的文档多年来一直在长期有机增长中，几乎没有结构，因此大部分 PixiJS 文档在多个站点上分散。这个新网站将把您需要的一切放在一个地方，并且易于搜索。
 
-We are also planning on improving the documentation and adding more guides and examples, as well as considering translating the documentation into other languages.
+我们还计划改进文档，添加更多指南和示例，以及考虑将文档翻译成其他语言。
 
-If you have any ideas on how to improve the site please let us know!
-- [Github Repo](https://github.com/pixijs/pixijs.com)
+如果您对如何改进网站有任何想法，请告诉我们！
+- [GitHub 仓库](https://github.com/pixijs/pixijs.com)
 
-### PixiJS React​
-Next up is PixiJS React. A library that provides a way to use PixiJS in React applications. PixiJS React is a continuation of the `react-pixi` library created by Patrick Brouwer, which has been widely used by the PixiJS community in React projects. PixiJS has taken over maintenance of the library and is dedicated to improving the library's performance, documentation, and support for new features.
+### PixiJS React
+接下来是 PixiJS React。这是一个库，提供了在 React 应用程序中使用 PixiJS 的方法。PixiJS React 是 Patrick Brouwer 创建的 `react-pixi` 库的延续，在 PixiJS 社区的 React 项目中被广泛使用。PixiJS 接管了这个库的维护，并致力于改善库的性能、文档和对新功能的支持。
 
-The library provides an easy-to-use interface that makes it easy for developers to create React applications with PixiJS. The library integrates all the core features of PixiJS and allows you to create custom components for 3rd party libraries.
+该库提供了一个易于使用的界面，使开发人员可以在 PixiJS 中创建 React 应用程序。该库集成了 PixiJS 的所有核心功能，并允许您为第三方库创建自定义组件。
 
-- [Github Repo](https://github.com/pixijs/pixi-react)
+- [GitHub 仓库](https://github.com/pixijs/pixi-react)
 
-### PixiJS Open Games​
-We have now released a new repository called "PixiJS Open Games". This is a collection of open-source games that showcases how to use PixiJS to create games and is released under the MIT license. The purpose of these games is to provide professional examples of how to use PixiJS for game development.
+### PixiJS 开源游戏
+我们现在发布了一个名为 "PixiJS 开源游戏" 的新存储库。这是一个展示如何使用 PixiJS 创建游戏的开源游戏集合，采用 MIT 许可证发布。这些游戏的目的是为了提供使用 PixiJS 进行游戏开发的专业示例。
 
-The first two games released are a match-3 game and a bubble shooter game. These games not only demonstrate how to use PixiJS for game development but also how to use other libraries such as PixiJS UI and AssetPack. We also have more games planned for release, which will demonstrate how to use PixiJS with other libraries such as PixiJS Layout and PixiJS React.
+发布的前两款游戏是一个消消乐游戏和一个泡泡射击游戏。这些游戏不仅演示了如何使用 PixiJS 进行游戏开发，还演示了如何使用其他库，如 PixiJS UI 和 AssetPack。我们还计划发布更多的游戏，这些游戏将演示如何将 Pix
 
-PixiJS Open Games will hopefully be a valuable resource for game developers who want to learn how to use PixiJS for game development and will also be a great source of inspiration for developers looking to create their own games using PixiJS. The project is available on GitHub for anyone who wants to explore the code or contribute to the project.
+iJS 与其他库（如 PixiJS Layout 和 PixiJS React）一起使用。
 
-- [Github Repo](https://github.com/pixijs/open-games)
-- [Play Puzzling Potions](https://puzzling-potions.netlify.app/)
-- [Play Bubbo Bubbo](https://bubbo-bubbo.netlify.app/)
+PixiJS 开源游戏将成为一个有价值的资源，供游戏开发人员学习如何使用 PixiJS 进行游戏开发，也将为希望使用 PixiJS 创建自己的游戏的开发人员提供灵感的来源。该项目在 GitHub 上提供，供任何希望探索代码或为项目做出贡献的人使用。
 
-### PixiJS UI & PixiJS Layout​
-PixiJS UI is a new library for developers who want to create beautiful and functional user interfaces with PixiJS. The library includes a range of components such as buttons, checkboxes, sliders, text inputs, scroll views, lists, radio buttons, and progress bars, which can be easily integrated into your game. These components are highly customizable, allowing you to tweak the appearance and behaviour of each element to fit your game's specific needs.
+- [GitHub 仓库](https://github.com/pixijs/open-games)
+- [玩 Puzzling Potions](https://puzzling-potions.netlify.app/)
+- [玩 Bubbo Bubbo](https://bubbo-bubbo.netlify.app/)
 
-PixiJS UI has been used in all of the open-source games, so feel free to check these out for real-world examples.
+### PixiJS UI & PixiJS Layout
+PixiJS UI 是一个面向开发人员的新库，用于使用 PixiJS 创建漂亮且功能齐全的用户界面。该库包括各种组件，如按钮、复选框、滑块、文本输入、滚动视图、列表、单选按钮和进度条，这些组件可以轻松集成到您的游戏中。这些组件可以高度定制，允许您微调每个元素的外观和行为，以适应您游戏的特定需求。
 
-- [PixiJS UI Github Repo](https://github.com/pixijs/ui)
+PixiJS UI 在所有开源游戏中都得到了应用，所以请随意查看这些游戏，以获取实际的示例。
 
-PixiJS Layout is another library that can make your life as a developer easier. This library enables you to create responsive layouts using PixiJS, which means you can design interfaces that adapt to different screen sizes and aspect ratios. PixiJS Layout works well with PixiJS UI, allowing you to combine both libraries to create complex, dynamic interfaces that respond to user input and screen changes.
+- [PixiJS UI GitHub 仓库](https://github.com/pixijs/ui)
 
-With PixiJS Layout, you have the flexibility to create resizable layouts that can be adjusted to fit any screen size or device. This means that your game's interface can look great on everything from small mobile devices to large desktop displays.
+PixiJS Layout 是另一个可以使开发人员的生活更加轻松的库。该库使您可以使用 PixiJS 创建响应式布局，这意味着您可以设计适应不同屏幕大小和纵横比的界面。PixiJS Layout 与 PixiJS UI 配合得很好，允许您将两个库结合起来，创建对用户输入和屏幕变化作出响应的复杂、动态的界面。
 
-PixiJS Layout is still under development but will be ready in the next few weeks
+使用 PixiJS Layout，您可以灵活地创建可调整大小的布局，以适应任何屏幕大小或设备。这意味着您的游戏界面可以在从小型移动设备到大型桌面显示器的各种设备上都表现出色。
 
-- [PixiJS Layout Github Repo](https://github.com/pixijs/layout)
+PixiJS Layout 目前仍在开发中，但将在未来几周内准备就绪。
 
-### AssetPack​
-Finally, for phase 1 we are announcing AssetPack.
+- [PixiJS Layout GitHub 仓库](https://github.com/pixijs/layout)
 
-Asset management is an important part of developing applications, and the new AssetPack library aims to make this process easier. AssetPack is a framework-agnostic library that can be used with any framework, including PixiJS, ThreeJS, and Phaser. It provides a range of features that help developers manage their assets efficiently.
-The key feature of AssetPack is the ability to automatically generate new assets on the fly. For example, you can provide it with a folder of individual images and it will generate sprite sheets, which can significantly improve the performance of your application. It also provides plugins to generate mipmaps, convert fonts to different formats, convert audio to different formats, compress images, and minify JSON. These features help developers optimize their assets for faster loading times, better performance, and improved user experience.
+### AssetPack
+最后，在第一阶段，我们宣布了 AssetPack。
 
-We will soon be releasing a new blog post that provides more details on how to use it. With its many useful features and framework-agnostic design. However, if you want to get stuck in today then check out the GitHub repo
+资产管理是应用程序开发的重要组成部分，新的 AssetPack 库旨在简化这个过程。AssetPack 是一个面向框架的库，可用于任何框架，包括 PixiJS、ThreeJS 和 Phaser。它提供了一系列功能，帮助开发人员高效地管理资产。
+AssetPack 的关键功能是能够自动生成新的资产。例如，您可以提供一个包含多个图像的文件夹，它将生成精灵图，这可以显着提高应用程序的性能。它还提供了生成 mipmaps、将字体转换为不同格式、将音频转换为不同格式、压缩图像和缩小 JSON 的插件。这些功能有助于开发人员优化资产，以实现更快的加载时间、更好的性能和更好的用户体验。
 
-- [Github Repo](https://github.com/pixijs/assetpack)
+我们将很快发布一篇新的博客文章，详细介绍如何使用它。凭借其许多有用的功能和框架无关的设计。但是，如果您想要立即着手，请查看 GitHub 仓库。
 
-## Phase 2​
-Phase 2 will begin shortly and aims to make it easier to work with PixiJS applications.
+- [GitHub 仓库](https://github.com/pixijs/assetpack)
 
-### PixiJS JumpStart​
-Jumpstart is a new CLI tool being developed by the PixiJS team to simplify the process of creating new PixiJS applications. With this tool, developers will no longer need to set up complicated tooling or worry about setting up different bundlers and frameworks. The tool will handle all the setup for you, allowing you to focus on building your application.
+## 第二阶段
+第二阶段将很快开始，旨在使与 PixiJS 应用程序的工作变得更加轻松。
 
-Jumpstart will be similar to other CLI tools such as Create-React-App or Create-Vue, which have become popular in the front-end development community. The tool will provide templates for different bundlers and frameworks, including webpack, parcel, rollup, and more. This will make it easy for developers to get started with PixiJS regardless of their preferred tools and workflows. With Jumpstart, you'll be able to create a new PixiJS application in just a few minutes and start building right away.
+### PixiJS JumpStart
+Jumpstart 是由 PixiJS 团队开发的新的 CLI 工具，旨在简化创建新的 PixiJS 应用程序的过程。通过这个工具，开发人员将不再需要设置复杂的工具链，也不需要担心设置不同的打包工具和框架。该工具将为您处理所有设置，让您可以专注于构建应用程序。
 
-### PixiJS Dev Tools​
-PixiJS dev tools will be a browser extension that is planned to be released soon to help developers debug their PixiJS applications. This tool aims to make it easier for developers to understand the inner workings of PixiJS, optimize their code, and follow best practices. It is designed to help developers diagnose performance issues and visualize the resources that their applications are consuming.
+Jumpstart 将类似于其他 CLI 工具，
 
-One of the key features of the PixiJS Dev Tools is its ability to help developers understand the complex process of batching in PixiJS. Batching is a technique used to optimize the rendering of multiple objects in the same draw call. This process can be complicated to understand, especially for new developers. PixiJS Dev Tools aims to make it easier to debug and optimize the rendering of objects.
+如 Create-React-App 或 Create-Vue，这些工具在前端开发社区中变得流行。该工具将为不同的打包工具和框架提供模板，包括 webpack、parcel、rollup 等。这将使开发人员无论使用哪种工具和工作流程，都可以轻松地开始使用 PixiJS。使用 Jumpstart，您可以在几分钟内创建一个新的 PixiJS 应用程序，并立即开始构建。
 
-Overall, PixiJS Dev Tools will be a powerful tool that will make it easier for developers to build high-performance, visually stunning applications with PixiJS. By providing developers with a deeper understanding of the inner workings of PixiJS, this toolset will help developers optimize their code and create more efficient and engaging applications.
+### PixiJS 开发工具
+PixiJS 开发工具将是一个即将发布的浏览器扩展，帮助开发人员调试他们的 PixiJS 应用程序。这个工具旨在帮助开发人员了解 PixiJS 的内部工作原理，优化他们的代码，并遵循最佳实践。它旨在帮助开发人员诊断性能问题，并可视化他们的应用程序正在消耗的资源。
 
-## Phase 3​
-Phase 3 is where our long-term projects start to be revealed. These are major changes to the PixiJS ecosystem that we are incredibly excited about
+PixiJS 开发工具的一个关键特性是其帮助开发人员理解 PixiJS 中复杂的批处理过程。批处理是一种优化技术，用于在同一绘制调用中优化多个对象的渲染。这个过程可能很复杂，尤其是对于新开发人员来说。PixiJS 开发工具旨在更轻松地调试和优化对象的渲染。
 
-### Comet​
-Comet will be a new editor that aims to make it easier than ever to design and create games and applications with PixiJS. With its intuitive and user-friendly interface, the editor is designed to appeal to both designers and developers, allowing both groups to collaborate and work more efficiently.
+总的来说，PixiJS 开发工具将是一个强大的工具，将使开发人员更容易构建高性能、视觉引人注目的 PixiJS 应用程序。通过为开发人员提供对 PixiJS 内部工作原理的更深入理解，这个工具集将帮助开发人员优化他们的代码，创建更高效和引人入胜的应用程序。
 
-One of the standout features of Comet is the visual interface it provides for creating and editing scenes, sprites, animations, and more. This means that designers can create and edit complex scenes without ever having to write a single line of code. The editor provides a range of tools and options for creating sprites, animations, and other game elements, making it easy to get started with creating a game or application.
+## 第三阶段
+第三阶段是我们开始逐步揭示长期项目的阶段。这些是对 PixiJS 生态系统的重大改变，我们对此感到非常兴奋。
 
-In addition, developers will appreciate the runtime player feature, which allows them to easily recreate scenes in their own applications. This makes it easy to test and iterate on designs, ensuring that the final product is both functional and visually appealing. And with multi-user, real-time collaboration, Comet makes it easy for teams to work together, sharing assets and ideas and creating high-quality games and applications in record time.
+### Comet
+Comet 将是一个全新的编辑器，旨在使使用 PixiJS 设计和创建游戏和应用程序变得更加容易。借助其直观且用户友好的界面，编辑器旨在同时吸引设计师和开发人员，使两者能够合作并更高效地工作。
 
-### PixiJS v8​
-PixiJS v8 will be the next major release that represents a complete rewrite of PixiJS from the ground up. The development team has leveraged their extensive experience over many years to make improvements and optimizations to the core PixiJS engine. The new version of PixiJS is designed to be faster and more efficient, providing a significant improvement in rendering performance compared to v7 (currently sitting at x2)
+Comet 最引人注目的功能之一是它为创建和编辑场景、精灵、动画等提供的视觉界面。这意味着设计师可以创建和编辑复杂的场景，而无需编写任何代码。编辑器提供了一系列工具和选项，用于创建精灵、动画和其他游戏元素，从而轻松开始创建游戏或应用程序。
 
-One of the most exciting features of PixiJS v8 is the inclusion of first-class support for WebGPU, which is a new graphics API that is being developed by major browser vendors. This will enable developers to take advantage of advanced GPU capabilities, which can significantly improve the performance of graphics-intensive applications. In addition to WebGPU support, the PixiJS team has also made a significant effort to optimize the engine for the canvas renderer, which will be available as a first-class option for developers looking to reduce bundle size.
+此外，开发人员将会欣赏运行时播放器功能，该功能允许他们在自己的应用程序中轻松重现场景。这使得测试和迭代设计变得容易，确保最终产品既具有功能性，又具有视觉吸引力。而且通过多用户、实时协作，Comet 可以轻松帮助团队合作，共享资产和创意，以在记录时间内创建高质量的游戏和应用程序。
 
-Overall, PixiJS v8 represents a major leap forward for us, developers can expect a much faster and more efficient engine that is better suited for building complex, graphics-intensive applications.
+### PixiJS v8
+PixiJS v8 将是下一个重大版本发布，代表了对 PixiJS 从头开始的完全重写。开发团队利用多年的丰富经验，对核心 PixiJS 引擎进行了改进和优化。新版本的 PixiJS 设计更快、更高效，与 v7（目前为止 x2 的渲染性能）相比，在渲染性能方面有了显著改进。
 
-## Phase 4​
-Phase 4 represents a leap into new territory for PixiJS as we look to delve deeper into areas outside of strictly 2D rendering.
+PixiJS v8 最令人兴奋的特性之一是对 WebGPU 的全面支持，这是一种由主要浏览器供应商开发的新的图形 API。这将使开发人员能够充分利用先进的 GPU 功能，从而显著提高图形密集型应用程序的性能。除了支持 WebGPU 外，PixiJS 团队还为画布渲染器进行了大量优化，这将作为首选选项供希望减少捆绑大小的开发人员使用。
 
-### PixiJS 3D​
-For years, Goodboy (now Playco) has had an internal 3D engine called Odie that was built on top of PixiJS. We are now planning to open-source it, which is exciting for those of you who want to seamlessly mix 2D and 3D content in your games or applications. With PixiJS 3D, you will no longer need to switch between engines or frameworks to incorporate 3D elements in your project.
+总的来说，PixiJS v8 对我们来说是一个重大的飞跃，开发人员可以期待一个更快、更高效的引擎，更适合构建复杂的图形密集型应用程序。
 
-Although this is a long-term project, the team is making progress and plans to share more information later in the year. This release will greatly expand PixiJS's capabilities and give developers even more flexibility when building their applications.
+## 第四阶段
+第四阶段代表了 PixiJS 迈入新领域的一大步，我们将深入探讨严格的 2D 渲染领域之外的领域。
 
-### PixiJS Game Engine​
-Finally, we are thrilled to announce that we will be working on a new library called PixiJS Game Engine. This game engine aims to provide everything you would expect from a 2D/3D game engine and will offer many features and tools to make game development easier and more efficient.
+### PixiJS 3D
+多年来，Goodboy（现在是 Playco）一直有一个名为 Odie 的内部 3D 引擎，它是基于 PixiJS 构建的。我们现在计划将其开源，这对于那些希望在游戏或应用程序中无缝混合 2D 和 3D 内容的开发人员来说是令人兴奋的。通过 PixiJS 3D，您将不再需要在引擎或框架之间切换，即可在项目中添加 3D 元素。
 
-Some of the features of PixiJS Game Engine will include support for physics engines, audio, input handling, asset loading and management, state management, animation and tweening, and more.
+虽然这是一个长期的项目，但团队正在取得进展，并计划在今年晚些时候分享更多信息。这个发布将极大地扩展 PixiJS 的功能
 
-## Conclusion
-We've shared a lot of exciting news about new projects and updates coming to the PixiJS community. There's a lot to look forward to in the upcoming months.
+，为开发人员在构建应用程序时提供更多的灵活性。
 
-We want to extend our sincere thanks to the PixiJS community, its contributors, and Playco for making all of this possible. We're excited to see what you'll create with these new tools and resources, and we look forward to continuing to support and grow the PixiJS ecosystem. Be sure to check out the GitHub links mentioned above and stay tuned for more updates on the PixiJS Universe!
+### PixiJS 游戏引擎
+最后，我们非常高兴地宣布，我们将致力于开发一个名为 PixiJS 游戏引擎的新库。这个游戏引擎旨在提供您从 2D/3D 游戏引擎中期望的一切，并将提供许多功能和工具，使游戏开发更加轻松和高效。
+
+PixiJS 游戏引擎的一些功能将包括对物理引擎的支持、音频、输入处理、资产加载和管理、状态管理、动画和补间动画等。
+
+## 结论
+我们已经分享了关于 PixiJS 社区即将推出的新项目和更新的许多令人兴奋的消息。在未来几个月中，有很多值得期待的事情。
+
+我们要向 PixiJS 社区、贡献者和 Playco 表示真诚的感谢，感谢他们使所有这一切成为可能。我们很期待看到您如何使用这些新工具和资源，并期待继续支持和发展 PixiJS 生态系统。请务必查看上面提到的 GitHub 链接，并关注 PixiJS 宇宙的更多更新！
