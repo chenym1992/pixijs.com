@@ -23,12 +23,12 @@ async function go()
     {
         const categoryExamples = examplesData[directoryKey];
         const directoryName = camelToSnake(directoryKey);
-        const categoryTitle = camelToTitle(directoryKey);
+        const categories = Object.keys(categoryExamples.category);
 
         return {
-            categoryTitle,
+            categoryTitle: categoryExamples.text,
             directoryPath: join(EXAMPLES_MD_PATH, directoryName),
-            examples: categoryExamples.map((exampleData) =>
+            examples: categories.map((exampleData) =>
             {
                 let exampleKey = exampleData;
                 let usesWebWorkerLibrary = false;
@@ -48,7 +48,7 @@ async function go()
                 return {
                     exampleSource: readFileSync(jsPath, 'utf8').trim(),
                     examplePath: mdPath,
-                    exampleTitle: camelToTitle(exampleKey),
+                    exampleTitle: categoryExamples.category[exampleKey],
                     hide,
                     usesWebWorkerLibrary,
                 };

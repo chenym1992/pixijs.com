@@ -3,6 +3,6 @@ hide_table_of_contents: true
 sidebar_position: 0
 ---
 
-# Examples
+# 示例
 
-Introduction here explaining examples and maybe links to featured examples.
+这里是关于示例的介绍，可能会包括链接到精选示例。

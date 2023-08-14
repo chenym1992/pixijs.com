@@ -1,108 +1,140 @@
 {
-  "basic": [
-    "blendModes",
-    "cacheAsBitmap",
-    "container",
-    "particleContainer",
-    "simplePlane",
-    "tinting",
-    "transparentBackground"
-  ],
-  "sprite": [
-    "animatedSpriteAnimationSpeed",
-    "animatedSpriteExplosion",
-    "animatedSpriteJet",
-    "basic",
-    "textureSwap",
-    "tilingSprite",
-    "video"
-  ],
-  "text": [
-    "bitmapText",
-    "fromFont",
-    "pixiText",
-    "webFont"
-  ],
-  "graphics": [
-    "advanced",
-    "dynamic",
-    "simple"
-  ],
-  "events": [
-    "click",
-    "customHitarea",
-    "customMouseIcon",
-    "dragging",
-    {
-      "name": "hitTestingWithSpatialHash",
-      "hide": true
-    },
-    "interactivity",
-    "logger",
-    "nestedBoundaryWithProjection",
-    "pointerTracker",
-    "slider"
-  ],
-  "masks": [
-    "filter",
-    "graphics",
-    "sprite"
-  ],
-  "textures": [
-    "gradientBasic",
-    "gradientResource",
-    "renderTextureAdvanced",
-    "renderTextureBasic",
-    "textureRotate"
-  ],
-  "assets": [
-    "async",
-    "background",
-    "bundle",
-    "multiple",
-    "promise"
-  ],
-  "offscreenCanvas": [
-    "basic",
-    {
-      "name": "webWorker",
-      "hide": true,
-      "usesWebWorkerLibrary": true
+  "basic": {
+    "text": "基础",
+    "category": {
+      "blendModes": "混合模式",
+      "cacheAsBitmap": "作为位图缓存",
+      "container": "容器",
+      "particleContainer": "粒子容器",
+      "simplePlane": "简单平面",
+      "tinting": "染色",
+      "transparentBackground": "透明背景"
     }
-  ],
-  "filtersBasic": [
-    "blur",
-    "colorMatrix",
-    "displacementMapCrawlies",
-    "displacementMapFlag"
-  ],
-  "filtersAdvanced": [
-    "custom",
-    "mouseBlending",
-    "shaderToyFilterRenderTexture"
-  ],
-  "advanced": [
-    "collisionDetection",
-    "mouseTrail",
-    "scratchCard",
-    "screenShot",
-    "slots",
-    "spinners",
-    "starWarp"
-  ],
-  "meshAndShaders": [
-    "instancedGeometry",
-    "interleavingGeometry",
-    "mergingGeometry",
-    "multiPassShaderGeneratedMesh",
-    "shaderToyMesh",
-    "sharedShader",
-    "sharingGeometry",
-    "texturedMeshAdvanced",
-    "texturedMeshBasic",
-    "triangleColor",
-    "triangleTextured",
-    "triangle",
-    "uniforms"
-  ]
+  },
+  "sprite": {
+    "text": "精灵",
+    "category": {
+      "animatedSpriteAnimationSpeed": "动画精灵动画速度",
+      "animatedSpriteExplosion": "动画精灵爆炸",
+      "animatedSpriteJet": "动画精灵喷射",
+      "basic": "基本",
+      "textureSwap": "纹理切换",
+      "tilingSprite": "平铺精灵",
+      "video": "视频"
+    }
+  },
+  "text": {
+    "text": "文本",
+    "category": {
+      "bitmapText": "位图文本",
+      "fromFont": "来自字体",
+      "pixiText": "Pixi 文本",
+      "webFont": "网络字体"
+    }
+  },
+  "graphics": {
+    "text": "图形",
+    "category": {
+      "advanced": "高级",
+      "dynamic": "动态",
+      "simple": "简单"
+    }
+  },
+  "events": {
+    "text": "事件",
+    "category": {
+      "click": "点击",
+      "customHitarea": "自定义点击区域",
+      "customMouseIcon": "自定义鼠标图标",
+      "dragging": "拖拽",
+      "hitTestingWithSpatialHash": { "name": "使用空间哈希进行点击测试", "hide": true },
+      "interactivity": "互动性",
+      "logger": "记录器",
+      "nestedBoundaryWithProjection": "带投影的嵌套边界",
+      "pointerTracker": "指针追踪器",
+      "slider": "滑块"
+    }
+  },
+  "masks": {
+    "text": "遮罩",
+    "category": {
+      "filter": "滤镜",
+      "graphics": "图形",
+      "sprite": "精灵"
+    }
+  },
+  "textures": {
+    "text": "纹理",
+    "category": {
+      "gradientBasic": "渐变基础",
+      "gradientResource": "渐变资源",
+      "renderTextureAdvanced": "高级渲染纹理",
+      "renderTextureBasic": "基本渲染纹理",
+      "textureRotate": "纹理旋转"
+    }
+  },
+  "assets": {
+    "text": "资产",
+    "category": {
+      "async": "异步",
+      "background": "背景",
+      "bundle": "捆绑",
+      "multiple": "多个",
+      "promise": "承诺"
+    }
+  },
+  "offscreenCanvas": {
+    "text": "离屏画布",
+    "category": {
+      "basic": "基本",
+      "webWorker": { "name": "Web Worker", "hide": true, "usesWebWorkerLibrary": true }
+    }
+  },
+  "filtersBasic": {
+    "text": "基本滤镜",
+    "category": {
+      "blur": "模糊",
+      "colorMatrix": "颜色矩阵",
+      "displacementMapCrawlies": "位移地图爬行效果",
+      "displacementMapFlag": "位移地图旗帜效果"
+    }
+  },
+  "filtersAdvanced": {
+    "text": "高级滤镜",
+    "category": {
+      "custom": "自定义",
+      "mouseBlending": "鼠标混合",
+      "shaderToyFilterRenderTexture": "ShaderToy 滤镜渲染纹理"
+    }
+  },
+  "advanced": {
+    "text": "高级",
+    "category": {
+      "collisionDetection": "碰撞检测",
+      "mouseTrail": "鼠标轨迹",
+      "scratchCard": "刮刮卡",
+      "screenShot": "屏幕截图",
+      "slots": "老虎机",
+      "spinners": "旋转器",
+      "starWarp": "星星扭曲"
+    }
+  },
+  "meshAndShaders": {
+    "text": "网格和着色器",
+    "category": {
+      "instancedGeometry": "实例几何体",
+      "interleavingGeometry": "交错几何体",
+      "mergingGeometry": "合并几何体",
+      "multiPassShaderGeneratedMesh": "多通道着色器生成的网格",
+      "shaderToyMesh": "ShaderToy 网格",
+      "sharedShader": "共享着色器",
+      "sharingGeometry": "共享几何体",
+      "texturedMeshAdvanced": "高级纹理网格",
+      "texturedMeshBasic": "基本纹理网格",
+      "triangleColor": "三角形颜色",
+      "triangleTextured": "带纹理的三角形",
+      "triangle": "三角形",
+      "uniforms": "Uniform 变量"
+    }
+  }
 }
